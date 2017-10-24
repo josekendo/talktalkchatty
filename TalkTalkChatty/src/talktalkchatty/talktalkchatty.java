@@ -13,7 +13,9 @@ import javafx.stage.Stage;
  * @author Usuario
  */
 
-public class TalkTalkChatty extends Application {
+public class talktalkchatty extends Application 
+{
+
 
     /**
      * @param args the command line arguments
