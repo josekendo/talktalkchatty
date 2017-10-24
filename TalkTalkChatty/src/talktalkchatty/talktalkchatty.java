@@ -23,7 +23,13 @@ public class talktalkchatty extends Application
     public static void main(String[] args) 
     {
         // TODO code application logic here
-        
+        Login nueva = new Login();
+        //con esta linea le decimos que queremos arrancarlo en el centro 
+        nueva.setLocationRelativeTo(null);
+        //hacemos visible la ventana de la consola
+        nueva.setVisible(true);
+        //vamos a arrancar el servicio de servidor
+        System.out.println("arranque chatclient");
     }
 
     @Override
