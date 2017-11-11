@@ -206,12 +206,12 @@ public class registro extends javax.swing.JFrame {
     private void botonExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExaminarActionPerformed
         // TODO add your handling code here:
         int seleccion=0;
-        
+
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);    //para solo abrir archivos
         seleccion = jFileChooser1.showOpenDialog(this);                             //abrimos la ventana de seleccion de archivo
-        
+
         if(seleccion == javax.swing.JFileChooser.APPROVE_OPTION)                    //En caso de haber abierto la ventana de seleccion
-        {                                                                           
+        {
             java.io.File archivoElegido = jFileChooser1.getSelectedFile();          //copiamos el archivo
             try{
                 String nombre = archivoElegido.getName();                           //copiamos su nombre
@@ -227,7 +227,7 @@ public class registro extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);                
+                new Login().setVisible(true);
             }
         });
         this.setVisible(false);
@@ -236,7 +236,7 @@ public class registro extends javax.swing.JFrame {
     private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
         // TODO add your handling code here:
 
-        
+
         char[] psw1 = jPasswordField1.getPassword();
         char[] psw2 = jPasswordField2.getPassword();
         boolean iguales = false, lleno = true, nombreLleno=campoNombreUsuario.getText().isEmpty(),
@@ -247,7 +247,7 @@ public class registro extends javax.swing.JFrame {
         jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
         jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
         campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
-        
+
         if(nombreLleno||eMail||jPasswordField1.getPassword().length==0||jPasswordField2.getPassword().length==0||foto){
             if(nombreLleno)
                 campoNombreUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
@@ -261,8 +261,8 @@ public class registro extends javax.swing.JFrame {
                 campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
             wrongRegistro.setText("Faltan campos por rellenar");
         }
-        
-        
+
+
         else{
             iguales=true;
             if(psw1.length==psw2.length){
@@ -283,12 +283,12 @@ public class registro extends javax.swing.JFrame {
         if(iguales){
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new Login().setVisible(true);                
+                    new Login().setVisible(true);
                 }
             });
             this.setVisible(false);
             }
-            
+
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     /**
@@ -298,7 +298,7 @@ public class registro extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
