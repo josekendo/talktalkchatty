@@ -45,6 +45,7 @@ public class registro extends javax.swing.JFrame {
         botonExaminar = new javax.swing.JButton();
         botonVolverLogin = new javax.swing.JButton();
         botonRegistrar = new javax.swing.JButton();
+        wrongRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,14 +103,14 @@ public class registro extends javax.swing.JFrame {
             }
         });
 
+        wrongRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        wrongRegistro.setForeground(new java.awt.Color(255, 0, 0));
+        wrongRegistro.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,13 +150,24 @@ public class registro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonVolverLogin)
                         .addGap(100, 100, 100))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(wrongRegistro)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(wrongRegistro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(campoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -238,16 +250,16 @@ public class registro extends javax.swing.JFrame {
         
         if(nombreLleno||eMail||jPasswordField1.getPassword().length==0||jPasswordField2.getPassword().length==0||foto){
             if(nombreLleno)
-                campoNombreUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+                campoNombreUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
             if(eMail)
-                campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+                campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
             if(jPasswordField1.getPassword().length==0)
-                jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+                jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
             if(jPasswordField2.getPassword().length==0)
-                jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+                jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
             if(foto)
-                campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
-            javax.swing.JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+                campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+            wrongRegistro.setText("Faltan campos por rellenar");
         }
         
         
@@ -263,9 +275,9 @@ public class registro extends javax.swing.JFrame {
             else
                 iguales=false;
             if(!iguales){
-                jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
-                jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
-                javax.swing.JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+                jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+                wrongRegistro.setText("Las contraseñas no coinciden");
             }
         }
         if(iguales){
@@ -333,5 +345,6 @@ public class registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JLabel wrongRegistro;
     // End of variables declaration//GEN-END:variables
 }
