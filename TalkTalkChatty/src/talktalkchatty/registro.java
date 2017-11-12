@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package talktalkchatty;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,8 +33,8 @@ public class registro extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        campoNombreUsuario = new javax.swing.JTextField();
+        campoEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -41,7 +44,8 @@ public class registro extends javax.swing.JFrame {
         campoDireccionFoto = new javax.swing.JTextField();
         botonExaminar = new javax.swing.JButton();
         botonVolverLogin = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonRegistrar = new javax.swing.JButton();
+        wrongRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,11 +55,14 @@ public class registro extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Nombre de usuario:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        campoNombreUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        campoNombreUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                campoNombreUsuarioActionPerformed(evt);
             }
         });
+
+        campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Correo electrónico:");
@@ -66,14 +73,14 @@ public class registro extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Contraseña:");
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
+        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+
+        jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Foto de Usuario:");
+
+        campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
 
         botonExaminar.setText("Examinar");
         botonExaminar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,16 +96,21 @@ public class registro extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Registrar");
+        botonRegistrar.setText("Registrar");
+        botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarActionPerformed(evt);
+            }
+        });
+
+        wrongRegistro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        wrongRegistro.setForeground(new java.awt.Color(255, 0, 0));
+        wrongRegistro.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,30 +140,41 @@ public class registro extends javax.swing.JFrame {
                                         .addGap(1, 1, 1)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField1))
+                                    .addComponent(campoEmail)
+                                    .addComponent(campoNombreUsuario))
                                 .addGap(1, 1, 1)))
                         .addGap(55, 55, 55))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonVolverLogin)
                         .addGap(100, 100, 100))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(wrongRegistro)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(wrongRegistro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -168,7 +191,7 @@ public class registro extends javax.swing.JFrame {
                     .addComponent(campoDireccionFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(botonRegistrar)
                     .addComponent(botonVolverLogin))
                 .addGap(51, 51, 51))
         );
@@ -176,23 +199,19 @@ public class registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void campoNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_campoNombreUsuarioActionPerformed
     //funcion de abrir la ventana de seleccion de archivo para escoger una foto
     private void botonExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExaminarActionPerformed
         // TODO add your handling code here:
         int seleccion=0;
-        
+
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);    //para solo abrir archivos
         seleccion = jFileChooser1.showOpenDialog(this);                             //abrimos la ventana de seleccion de archivo
-        
+
         if(seleccion == javax.swing.JFileChooser.APPROVE_OPTION)                    //En caso de haber abierto la ventana de seleccion
-        {                                                                           
+        {
             java.io.File archivoElegido = jFileChooser1.getSelectedFile();          //copiamos el archivo
             try{
                 String nombre = archivoElegido.getName();                           //copiamos su nombre
@@ -208,11 +227,69 @@ public class registro extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);                
+                new Login().setVisible(true);
             }
         });
         this.setVisible(false);
     }//GEN-LAST:event_botonVolverLoginActionPerformed
+
+    private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
+        // TODO add your handling code here:
+
+
+        char[] psw1 = jPasswordField1.getPassword();
+        char[] psw2 = jPasswordField2.getPassword();
+        boolean iguales = false, lleno = true, nombreLleno=campoNombreUsuario.getText().isEmpty(),
+                eMail = campoEmail.getText().isEmpty(), foto = campoDireccionFoto.getText().isEmpty();
+        int letra = 0;
+        campoNombreUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+
+        if(nombreLleno||eMail||jPasswordField1.getPassword().length==0||jPasswordField2.getPassword().length==0||foto){
+            if(nombreLleno)
+                campoNombreUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+            if(eMail)
+                campoEmail.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+            if(jPasswordField1.getPassword().length==0)
+                jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+            if(jPasswordField2.getPassword().length==0)
+                jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+            if(foto)
+                campoDireccionFoto.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+            wrongRegistro.setText("Faltan campos por rellenar");
+        }
+
+
+        else{
+            iguales=true;
+            if(psw1.length==psw2.length){
+                while(iguales&&letra<psw1.length){
+                    if(psw1[letra]!=psw2[letra])
+                        iguales=false;
+                    letra++;
+                }
+            }
+            else
+                iguales=false;
+            if(!iguales){
+                jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+                jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+                wrongRegistro.setText("Las contraseñas no coinciden");
+            }
+        }
+        if(iguales){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new Login().setVisible(true);
+                }
+            });
+            this.setVisible(false);
+            }
+
+    }//GEN-LAST:event_botonRegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,7 +298,7 @@ public class registro extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -254,9 +331,11 @@ public class registro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonExaminar;
+    private javax.swing.JButton botonRegistrar;
     private javax.swing.JButton botonVolverLogin;
     private javax.swing.JTextField campoDireccionFoto;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoNombreUsuario;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -266,7 +345,6 @@ public class registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel wrongRegistro;
     // End of variables declaration//GEN-END:variables
 }
