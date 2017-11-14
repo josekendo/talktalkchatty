@@ -152,11 +152,20 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new record().setVisible(true);
         });
+        /*javax.swing.JPanel recordar = new record();
+            this.getContentPane().add(recordar);
+            recordar.setVisible(true);
+        });*/
+        //this.setVisible(false);
         this.setVisible(false);
     }//GEN-LAST:event_forgotActionPerformed
 
     private void registro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro1ActionPerformed
         // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(() -> {
+            new registro().setVisible(true);
+        });
+        this.setVisible(false);
     }//GEN-LAST:event_registro1ActionPerformed
 
     /**
