@@ -25,6 +25,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.repaint();
         wrong.setVisible(false);
     }
+<<<<<<< HEAD
      public class Imagen extends javax.swing.JPanel { 
         public Imagen() { 
             this.setSize(jPanel1.getHeight(), jPanel1.getWidth()); //se selecciona el tamaño del panel 
@@ -44,6 +45,9 @@ public class Login extends javax.swing.JFrame {
             super.paintComponent(grafico); 
         } 
     } 
+=======
+      
+>>>>>>> master
      
      
      
