@@ -27,11 +27,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="180" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -52,8 +47,8 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPasswordField2" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jPasswordField1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="passwordRepite" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="passwordContrasenya" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                   </Group>
@@ -69,7 +64,15 @@
                               </Group>
                               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream
                                   <Component id="campoEmail" max="32767" attributes="0"/>
+=======
+<<<<<<< HEAD
+                                  <Component id="campoCorreoElectronico" max="32767" attributes="0"/>
+=======
+                                  <Component id="campoEmail" max="32767" attributes="0"/>
+>>>>>>> master
+>>>>>>> Stashed changes
                                   <Component id="campoNombreUsuario" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -78,13 +81,46 @@
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
+<<<<<<< Updated upstream
                       <EmptySpace pref="84" max="32767" attributes="0"/>
                       <Component id="botonRegistrar" min="-2" pref="103" max="-2" attributes="0"/>
+=======
+<<<<<<< HEAD
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <Component id="jButton3" min="-2" pref="103" max="-2" attributes="0"/>
+=======
+                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                      <Component id="botonRegistrar" min="-2" pref="103" max="-2" attributes="0"/>
+>>>>>>> master
+>>>>>>> Stashed changes
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="botonVolverLogin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+<<<<<<< Updated upstream
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="wrongRegistro" min="-2" max="-2" attributes="0"/>
+=======
+<<<<<<< HEAD
+                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+=======
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                      <Component id="wrongRegistro" min="-2" max="-2" attributes="0"/>
+>>>>>>> master
+>>>>>>> Stashed changes
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,7 +129,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+<<<<<<< Updated upstream
+              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <Component id="wrongRegistro" min="-2" max="-2" attributes="0"/>
+=======
+<<<<<<< HEAD
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+=======
+              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <Component id="wrongRegistro" min="-2" max="-2" attributes="0"/>
+>>>>>>> master
+>>>>>>> Stashed changes
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="campoNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -101,21 +149,29 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream
                   <Component id="campoEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+<<<<<<< HEAD
+                  <Component id="campoCorreoElectronico" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                  <Component id="campoEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> master
+>>>>>>> Stashed changes
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="passwordContrasenya" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jPasswordField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="passwordRepite" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="botonExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -126,7 +182,7 @@
                   <Component id="botonRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botonVolverLogin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,7 +209,15 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
+<<<<<<< Updated upstream
               <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+=======
+<<<<<<< HEAD
+              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+=======
+              <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+>>>>>>> master
+>>>>>>> Stashed changes
             </LineBorder>
           </Border>
         </Property>
@@ -162,12 +226,28 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoNombreUsuarioActionPerformed"/>
       </Events>
     </Component>
+<<<<<<< Updated upstream
     <Component class="javax.swing.JTextField" name="campoEmail">
+=======
+<<<<<<< HEAD
+    <Component class="javax.swing.JTextField" name="campoCorreoElectronico">
+=======
+    <Component class="javax.swing.JTextField" name="campoEmail">
+>>>>>>> master
+>>>>>>> Stashed changes
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
+<<<<<<< Updated upstream
               <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+=======
+<<<<<<< HEAD
+              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+=======
+              <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+>>>>>>> master
+>>>>>>> Stashed changes
             </LineBorder>
           </Border>
         </Property>
@@ -197,23 +277,60 @@
         <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
       </Properties>
     </Component>
+<<<<<<< HEAD
+    <Component class="javax.swing.JPasswordField" name="passwordContrasenya">
+=======
     <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
+<<<<<<< Updated upstream
               <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+=======
+<<<<<<< HEAD
+              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+=======
+              <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+>>>>>>> master
+>>>>>>> Stashed changes
             </LineBorder>
           </Border>
         </Property>
       </Properties>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordContrasenyaActionPerformed"/>
+      </Events>
+>>>>>>> Stashed changes
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passwordRepite">
+=======
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField2">
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
+<<<<<<< Updated upstream
               <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+=======
+<<<<<<< HEAD
+              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+=======
+              <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+>>>>>>> master
+>>>>>>> Stashed changes
             </LineBorder>
           </Border>
         </Property>
@@ -232,7 +349,15 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder>
+<<<<<<< Updated upstream
               <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+=======
+<<<<<<< HEAD
+              <Color PropertyName="color" blue="99" green="99" red="99" type="rgb"/>
+=======
+              <Color PropertyName="color" blue="96" green="96" red="96" type="rgb"/>
+>>>>>>> master
+>>>>>>> Stashed changes
             </LineBorder>
           </Border>
         </Property>
@@ -241,6 +366,9 @@
     <Component class="javax.swing.JButton" name="botonExaminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Examinar"/>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonExaminarActionPerformed"/>
@@ -249,6 +377,9 @@
     <Component class="javax.swing.JButton" name="botonVolverLogin">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver al login"/>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVolverLoginActionPerformed"/>
@@ -257,10 +388,49 @@
     <Component class="javax.swing.JButton" name="botonRegistrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrar"/>
+        <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="default"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="16" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Rellena todos los campos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegistrarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="wrongRegistro">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value=" "/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRegistrarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="wrongRegistro">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value=" "/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -44,15 +44,21 @@ public class Login extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         acceder = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        forgot = new javax.swing.JButton();
         user = new javax.swing.JTextField();
         wrong = new javax.swing.JLabel();
+        registro1 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nick o email: ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 176, 94, 34));
 
         jLabel2.setText("Password: ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 217, 94, 34));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 223, 130, -1));
 
         jCheckBox1.setText("Recordarme");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +66,7 @@ public class Login extends javax.swing.JFrame {
                 jCheckBox1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 270, -1, -1));
 
         acceder.setText("Acceder");
         acceder.addActionListener(new java.awt.event.ActionListener() {
@@ -67,88 +74,51 @@ public class Login extends javax.swing.JFrame {
                 accederActionPerformed(evt);
             }
         });
+        getContentPane().add(acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 261, 89, 43));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(145, 145));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 197, Short.MAX_VALUE)
+            .addGap(0, 145, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 138, Short.MAX_VALUE)
+            .addGap(0, 145, Short.MAX_VALUE)
         );
 
-        jButton2.setText("Regístrate");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 18, -1, -1));
+
+        forgot.setText("He olvidado mi contraseña");
+        forgot.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        forgot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        forgot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                forgotActionPerformed(evt);
             }
         });
+        getContentPane().add(forgot, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 130, 56));
+        getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 182, 130, -1));
 
         wrong.setVisible(false);
         wrong.setForeground(new java.awt.Color(255, 0, 0));
         wrong.setText("Usuario o contraseña incorrectos");
         wrong.setFocusable(false);
+        getContentPane().add(wrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 317, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(22, 22, 22)
-                                        .addComponent(wrong))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckBox1)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(acceder))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(123, 123, 123))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(acceder)
-                    .addComponent(jCheckBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(wrong)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-        );
+        registro1.setText("Regístrate");
+        registro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registro1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(registro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 130, 56));
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 20, 170));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,21 +129,35 @@ public class Login extends javax.swing.JFrame {
 
     private void accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accederActionPerformed
         // TODO add your handling code here:
+        
+        
+        //Buscar el nick en la "Base de datos"
         String nick = "pepe";
         String pass = "1234";
         
+        
         if(!user.getText().equals("") && !password.getText().equals("")&& nick.equals(user.getText()) && pass.equals(password.getText())){
-            //Conduciria al CHAT. Esto funciona cuando User y Password estan OK            
-            
+            java.awt.EventQueue.invokeLater(() -> {
+                new chat().setVisible(true);
+            });
+            this.setVisible(false);
         }else{
             wrong.setVisible(true);
         }
         
     }//GEN-LAST:event_accederActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void forgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        java.awt.EventQueue.invokeLater(() -> {
+            new record().setVisible(true);
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_forgotActionPerformed
+
+    private void registro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registro1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,12 +196,14 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceder;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton forgot;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton registro1;
     private javax.swing.JTextField user;
     private javax.swing.JLabel wrong;
     // End of variables declaration//GEN-END:variables
