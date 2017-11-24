@@ -43,7 +43,7 @@ public class chat extends javax.swing.JFrame {
         botonEnviar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputTexto = new javax.swing.JEditorPane();
-        ultimaConexion = new javax.swing.JLabel();
+        lab_ConectUsu = new javax.swing.JLabel();
         nomConversacion = new javax.swing.JLabel();
         panelImgConversacion = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -58,11 +58,21 @@ public class chat extends javax.swing.JFrame {
         botonAnyadir.setText("Añadir");
 
         botonEliminar.setText("Eliminar");
+        botonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonEliminarMouseClicked(evt);
+            }
+        });
 
         listaConversaciones.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Grupo 1", "Grupo 2", "Grupo 3", "Conversación" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        listaConversaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaConversacionesMouseClicked(evt);
+            }
         });
         jScrollPane4.setViewportView(listaConversaciones);
 
@@ -99,7 +109,7 @@ public class chat extends javax.swing.JFrame {
         jScrollPane1.setViewportView(inputTexto);
         inputTexto.getAccessibleContext().setAccessibleName("cosaPrueba");
 
-        ultimaConexion.setText("Última conexión: 18:09");
+        lab_ConectUsu.setText("Última conexión: 18:09");
 
         nomConversacion.setText("Conversación");
 
@@ -153,7 +163,7 @@ public class chat extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nomConversacion)
-                                    .addComponent(ultimaConexion))
+                                    .addComponent(lab_ConectUsu))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
@@ -180,7 +190,7 @@ public class chat extends javax.swing.JFrame {
                                         .addGap(4, 4, 4)
                                         .addComponent(nomConversacion)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ultimaConexion))
+                                        .addComponent(lab_ConectUsu))
                                     .addComponent(panelImgConversacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2)
@@ -205,6 +215,28 @@ public class chat extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void listaConversacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConversacionesMouseClicked
+        String valor = listaConversaciones.getSelectedValue();
+        int indice = listaConversaciones.getSelectedIndex();
+        
+        nomConversacion.setText(valor);
+        
+        /*if (valor == grupo) {
+            // count miembros del grupo
+            lab_ConectUsu.setText(SacarNumeroMiembrosGrupo(indice,valor)+" miembros");
+        } else {
+            lab_ConectUsu.setText("Última conexión de la persona");
+        }*/
+        
+        // Cargar los textos de esta conversación
+        //CargarConversacion();
+    }//GEN-LAST:event_listaConversacionesMouseClicked
+
+    private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
+        
+        //listaConversaciones.remove(listaConversaciones.getSelectedIndex());
+    }//GEN-LAST:event_botonEliminarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -263,11 +295,19 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lab_ConectUsu;
     private javax.swing.JList<String> listaConversaciones;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JLabel nomConversacion;
     private javax.swing.JPanel panelImgConversacion;
     private javax.swing.JEditorPane pantalla;
-    private javax.swing.JLabel ultimaConexion;
     // End of variables declaration//GEN-END:variables
+
+    private void CargarConversacion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int SacarNumeroMiembrosGrupo(int indice, String grupo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
