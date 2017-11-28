@@ -19,9 +19,21 @@ public class chat extends javax.swing.JFrame {
      */
     public chat() {
         initComponents();
-        Imagen imgUsu = new Imagen(50,50);
+        
+        Imagen imgUsu = new Imagen(50,50,"logoTTC.png");
         panelImgConversacion.add(imgUsu);
         panelImgConversacion.repaint();
+        
+        botonAnyadir.insets() = new Insets(0,0,0,0);
+        Imagen imgNew = new Imagen(botonAnyadir.getHeight(),botonAnyadir.getHeight(),"plusIcon.png");
+        botonAnyadir.add(imgNew);
+        botonAnyadir.repaint();
+        
+        Imagen imgRem = new Imagen(botonEliminar.getWidth(),botonEliminar.getHeight(),"trashIcon.png");
+        botonEliminar.add(imgRem);
+        botonEliminar.repaint();
+        
+        
     }
 
     /**
@@ -55,9 +67,22 @@ public class chat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        botonAnyadir.setText("Añadir");
+        botonAnyadir.setMaximumSize(new java.awt.Dimension(35, 35));
+        botonAnyadir.setMinimumSize(new java.awt.Dimension(35, 35));
+        botonAnyadir.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonAnyadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAnyadirActionPerformed(evt);
+            }
+        });
 
-        botonEliminar.setText("Eliminar");
+        botonEliminar.setToolTipText("");
+        botonEliminar.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
         listaConversaciones.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Grupo 1", "Grupo 2", "Grupo 3", "Conversación" };
@@ -70,20 +95,21 @@ public class chat extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(botonAnyadir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(botonEliminar))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botonAnyadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane4)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAnyadir)
-                    .addComponent(botonEliminar)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAnyadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pantalla.setEditable(false);
@@ -145,7 +171,7 @@ public class chat extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -156,7 +182,7 @@ public class chat extends javax.swing.JFrame {
                                     .addComponent(ultimaConexion))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonEnviar)))
                         .addContainerGap())))
@@ -198,13 +224,17 @@ public class chat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEnviarMouseClicked
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEliminarActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void botonAnyadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnyadirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_botonAnyadirActionPerformed
 
     /**
      * @param args the command line arguments

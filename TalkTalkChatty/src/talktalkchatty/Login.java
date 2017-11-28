@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth());
+        Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth(),"logoTTC.png");
         jPanel1.add(Imagen);
         jPanel1.repaint();
         wrong.setVisible(false);
