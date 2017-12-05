@@ -7,6 +7,10 @@ package talktalkchatty;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 /**
  *
@@ -22,6 +26,9 @@ public class chat extends javax.swing.JFrame {
         Imagen imgUsu = new Imagen(50,50);
         panelImgConversacion.add(imgUsu);
         panelImgConversacion.repaint();
+        
+        // Preparada para anyadir usuarios y conversaciones
+        CargarListaConversaciones();
     }
 
     /**
@@ -64,11 +71,6 @@ public class chat extends javax.swing.JFrame {
             }
         });
 
-        listaConversaciones.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Grupo 1", "Grupo 2", "Grupo 3", "Conversación" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaConversaciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaConversacionesMouseClicked(evt);
@@ -82,9 +84,9 @@ public class chat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(botonAnyadir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonEliminar))
-            .addComponent(jScrollPane4)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,23 +155,23 @@ public class chat extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(panelImgConversacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nomConversacion)
                                     .addComponent(lab_ConectUsu))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 219, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonEnviar)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +220,7 @@ public class chat extends javax.swing.JFrame {
 
     private void listaConversacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConversacionesMouseClicked
         String valor = listaConversaciones.getSelectedValue();
-        int indice = listaConversaciones.getSelectedIndex();
+        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
         
         nomConversacion.setText(valor);
         
@@ -235,7 +237,19 @@ public class chat extends javax.swing.JFrame {
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
         
-        //listaConversaciones.remove(listaConversaciones.getSelectedIndex());
+        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
+        
+        //Comprobamos que haya algo seleccionado
+        if (indice >= 0) {
+            String mensaje = "¿Estás seguro de eliminar esta conversación?";
+            int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
+                JOptionPane.YES_NO_OPTION);
+
+            if (resp == 0) {
+                DefaultListModel modelo = (DefaultListModel) listaConversaciones.getModel();
+                modelo.remove(indice);
+            }
+        }
     }//GEN-LAST:event_botonEliminarMouseClicked
 
     /**
@@ -277,6 +291,8 @@ public class chat extends javax.swing.JFrame {
                         //ComprobarIpPuerto(textFieldIpServidor.getText());
                 }
         });*/
+        
+        
     }
     
     
@@ -309,5 +325,16 @@ public class chat extends javax.swing.JFrame {
 
     private int SacarNumeroMiembrosGrupo(int indice, String grupo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void CargarListaConversaciones() {
+        DefaultListModel modelo = new DefaultListModel();
+        modelo.addElement("Maria");
+        modelo.addElement("Perez");
+        modelo.addElement("Grupo 1");
+        modelo.addElement("Grupo 2");
+        modelo.addElement("Conversación");
+        listaConversaciones.setModel(modelo);
+        
     }
 }
