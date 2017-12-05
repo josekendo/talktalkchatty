@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth());
+        Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth(),"logoTTC.png");
         jPanel1.add(Imagen);
         jPanel1.repaint();
         wrong.setVisible(false);
@@ -35,10 +35,10 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
         acceder = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         forgot = new javax.swing.JButton();
@@ -46,6 +46,13 @@ public class Login extends javax.swing.JFrame {
         wrong = new javax.swing.JLabel();
         registro1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+
+        jCheckBox1.setText("Recordarme");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,21 +64,13 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 217, 94, 34));
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 223, 130, -1));
 
-        jCheckBox1.setText("Recordarme");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 270, -1, -1));
-
         acceder.setText("Acceder");
         acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accederActionPerformed(evt);
             }
         });
-        getContentPane().add(acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 261, 89, 43));
+        getContentPane().add(acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 89, 43));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(145, 145));
@@ -89,7 +88,7 @@ public class Login extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 18, -1, -1));
 
-        forgot.setText("He olvidado mi contraseña");
+        forgot.setText("<html><p style='text-align:center';>He olvidado</p><p>mi contraseña</p></html>");
         forgot.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         forgot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         forgot.addActionListener(new java.awt.event.ActionListener() {
