@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package talktalkchatty;
-
-
 /**
  *
  * @author jmld4
@@ -15,15 +13,34 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private seguridad se;
+    private almacenamiento al;
+    
     public Login() {
         initComponents();
         Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth(),"logoTTC.png");
         jPanel1.add(Imagen);
         jPanel1.repaint();
         wrong.setVisible(false);
+        //conectamos con el servidor 
+        se = new seguridad();//esto se hereda de una ventana a otra
+        se.crearSessionAes();
+        se.crearrsa();
+        al = new almacenamiento();
+        String infoConexion [] = al.recuperarInfoConexion();
+        conexion co = new conexion(infoConexion[0],Integer.parseInt(infoConexion[1]));
+        co.nuevaconexion(se);
     }
 
-
+    public Login(seguridad seg) {
+        initComponents();
+        Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth(),"logoTTC.png");
+        jPanel1.add(Imagen);
+        jPanel1.repaint();
+        wrong.setVisible(false);
+        //conectamos con el servidor 
+        se = seg;
+    }
 
 
     /**
@@ -133,7 +150,6 @@ public class Login extends javax.swing.JFrame {
     private void accederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accederActionPerformed
         // TODO add your handling code here:
 
-
         //Buscar el nick en la "Base de datos"
         String nick = "pepe";
         String pass = "1234";
@@ -166,7 +182,7 @@ public class Login extends javax.swing.JFrame {
     private void registro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro1ActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new registro().setVisible(true);
+            new registro(se).setVisible(true);
             
         });
         this.setVisible(false);

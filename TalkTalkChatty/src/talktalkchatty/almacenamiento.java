@@ -130,6 +130,18 @@ public class almacenamiento {
         return directorio.exists();
     }
     
+    //recupera la informacion del archivo conexion.inf para saber el host del servidor
+    public String[] recuperarInfoConexion()
+    {
+        String ruta = "conexion.inf";
+        File archivo = new File(ruta);
+        if(archivo.exists())
+        {
+            return this.leer(archivo);
+        }
+        return null;    
+    }
+    
     
     //lee un fichero y devuelve si un string
     public String[] leer(File archivo)

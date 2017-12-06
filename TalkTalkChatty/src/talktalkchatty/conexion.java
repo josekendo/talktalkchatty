@@ -110,4 +110,8 @@ public class conexion {
     {
         return se;
     }
+    //comprobar email 
+    public void comprobaremail(String email)
+    {
+    }
 }
