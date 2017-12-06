@@ -5,7 +5,9 @@
  */
 package talktalkchatty;
 
+import java.io.File;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,6 +39,8 @@ public class chat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        adjuntarFrame = new javax.swing.JFrame();
+        adjuntarArchivo = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         botonAnyadir = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
@@ -58,6 +62,27 @@ public class chat extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+
+        javax.swing.GroupLayout adjuntarFrameLayout = new javax.swing.GroupLayout(adjuntarFrame.getContentPane());
+        adjuntarFrame.getContentPane().setLayout(adjuntarFrameLayout);
+        adjuntarFrameLayout.setHorizontalGroup(
+            adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(adjuntarFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(adjuntarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        adjuntarFrameLayout.setVerticalGroup(
+            adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(adjuntarFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(adjuntarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -297,6 +322,20 @@ public class chat extends javax.swing.JFrame {
 
     private void botonAdjuntarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdjuntarActionPerformed
         // TODO add your handling code here:
+        int relVal = adjuntarArchivo.showOpenDialog(adjuntarFrame);
+        if (relVal == JFileChooser.APPROVE_OPTION) {
+            //Ha subido un archivo
+            File file = adjuntarArchivo.getSelectedFile();
+            try {
+              //Aqui habria que poner lo que hace con el archivo
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+file.getAbsolutePath());
+            }
+        } 
+        else {
+            //No ha subido nada
+            System.out.println("File access cancelled by user.");
+        }   
     }//GEN-LAST:event_botonAdjuntarActionPerformed
 
     /**
@@ -345,6 +384,8 @@ public class chat extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFileChooser adjuntarArchivo;
+    private javax.swing.JFrame adjuntarFrame;
     private javax.swing.JButton botonAdjuntar;
     private javax.swing.JButton botonAnyadir;
     private javax.swing.JButton botonEliminar;
@@ -367,7 +408,9 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JPanel panelImgConversacion;
     private javax.swing.JEditorPane pantalla;
     // End of variables declaration//GEN-END:variables
-
+    
+    
+    
     private void CargarConversacion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
