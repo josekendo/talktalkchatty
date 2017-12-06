@@ -21,6 +21,7 @@ public class conexion {
     private Socket conexion;   
     protected DataOutputStream salida;
     protected DataInputStream entrada;
+    private seguridad se;
     //inicializamos el objeto conexion(unico) pasandole la ip y el puerto
     public conexion(String ipp, int puertop) 
     {
@@ -59,19 +60,16 @@ public class conexion {
         return false;
     }
     //creamos el objeto que establece la conexion con el servidor
-    public boolean nuevaconexion()
+    public boolean nuevaconexion(seguridad seg)
     {
         try 
         {
             conexion = new Socket(ip,puerto);
             salida = new DataOutputStream(conexion.getOutputStream());
             entrada = new DataInputStream(conexion.getInputStream());
-            if(entrada.readUTF().compareToIgnoreCase("Hola soy el servidor") >= 0)
-            {
-                System.out.println("Conexion establecida con el servidor -> "+ip+":"+puerto+"   [OK]");
-                //FALTA FALTA crear un thread que maneje los mensajes que se reciben
-                return true;
-            }
+            se = seg;
+            ((hilo) new hilo(conexion,this)).start();//iniciamos escucha 
+            return true;
         } 
         catch (IOException ex) 
         {
@@ -106,5 +104,10 @@ public class conexion {
             }
         }
         return false;
+    }
+    //recupera seguridad
+    public seguridad recuperarSE()
+    {
+        return se;
     }
 }
