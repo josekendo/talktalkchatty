@@ -5,14 +5,11 @@
  */
 package talktalkchatty;
 
-<<<<<<< HEAD
-=======
 import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
->>>>>>> master
 /**
  *
  * @author JVAC
@@ -24,8 +21,6 @@ public class chat extends javax.swing.JFrame {
      */
     public chat() {
         initComponents();
-<<<<<<< HEAD
-=======
         
         Imagen imgUsu = new Imagen(50,50,"logoTTC.png");
         panelImgConversacion.add(imgUsu);
@@ -33,7 +28,6 @@ public class chat extends javax.swing.JFrame {
         
         // Preparada para anyadir usuarios y conversaciones
         CargarListaConversaciones();
->>>>>>> master
     }
 
     /**
@@ -48,13 +42,6 @@ public class chat extends javax.swing.JFrame {
         adjuntarFrame = new javax.swing.JFrame();
         adjuntarArchivo = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
-<<<<<<< HEAD
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jEditorPane2 = new javax.swing.JEditorPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-=======
         botonAnyadir = new javax.swing.JButton();
         botonEliminar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -75,7 +62,6 @@ public class chat extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
->>>>>>> master
 
         javax.swing.GroupLayout adjuntarFrameLayout = new javax.swing.GroupLayout(adjuntarFrame.getContentPane());
         adjuntarFrame.getContentPane().setLayout(adjuntarFrameLayout);
@@ -100,8 +86,6 @@ public class chat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-<<<<<<< HEAD
-=======
         botonAnyadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/plusIconMini.png"))); // NOI18N
         botonAnyadir.setMaximumSize(new java.awt.Dimension(35, 35));
         botonAnyadir.setMinimumSize(new java.awt.Dimension(35, 35));
@@ -128,24 +112,10 @@ public class chat extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(listaConversaciones);
 
->>>>>>> master
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-            .addGap(0, 153, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-
-        jScrollPane2.setViewportView(jEditorPane2);
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-=======
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botonAnyadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,10 +198,6 @@ public class chat extends javax.swing.JFrame {
         menuArchivo.add(jMenuItem4);
 
         jMenuBar1.add(menuArchivo);
->>>>>>> master
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -242,11 +208,6 @@ public class chat extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                .addContainerGap())
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -271,17 +232,11 @@ public class chat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(64, 64, 64))))
->>>>>>> master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -303,15 +258,14 @@ public class chat extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(botonEnviar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
->>>>>>> master
                 .addContainerGap())
         );
+
+        botonEnviar.getAccessibleContext().setAccessibleDescription("botonEnviar");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-<<<<<<< HEAD
-=======
     private void botonEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEnviarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_botonEnviarMouseClicked
@@ -319,6 +273,10 @@ public class chat extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void botonAnyadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnyadirActionPerformed
         // TODO add your handling code here:
@@ -340,6 +298,23 @@ public class chat extends javax.swing.JFrame {
         // Cargar los textos de esta conversación
         //CargarConversacion();
     }//GEN-LAST:event_listaConversacionesMouseClicked
+
+    private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
+        
+        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
+        
+        //Comprobamos que haya algo seleccionado
+        if (indice >= 0) {
+            String mensaje = "¿Estás seguro de eliminar esta conversación?";
+            int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
+                JOptionPane.YES_NO_OPTION);
+
+            if (resp == 0) {
+                DefaultListModel modelo = (DefaultListModel) listaConversaciones.getModel();
+                modelo.remove(indice);
+            }
+        }
+    }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonEmojiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmojiActionPerformed
         // TODO add your handling code here:
@@ -363,11 +338,6 @@ public class chat extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_botonAdjuntarActionPerformed
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        EliminarConversacion();
-    }//GEN-LAST:event_botonEliminarActionPerformed
-
->>>>>>> master
     /**
      * @param args the command line arguments
      */
@@ -401,8 +371,6 @@ public class chat extends javax.swing.JFrame {
                 new chat().setVisible(true);
             }
         });
-<<<<<<< HEAD
-=======
         
         /*botonEnviar.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -411,15 +379,11 @@ public class chat extends javax.swing.JFrame {
         });*/
         
         
->>>>>>> master
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JEditorPane jEditorPane2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-=======
     private javax.swing.JFileChooser adjuntarArchivo;
     private javax.swing.JFrame adjuntarFrame;
     private javax.swing.JButton botonAdjuntar;
@@ -428,12 +392,12 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JButton botonEmoji;
     private javax.swing.JButton botonEnviar;
     private javax.swing.JEditorPane inputTexto;
->>>>>>> master
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
-<<<<<<< HEAD
-    private javax.swing.JScrollPane jScrollPane2;
-=======
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -443,7 +407,6 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JLabel nomConversacion;
     private javax.swing.JPanel panelImgConversacion;
     private javax.swing.JEditorPane pantalla;
->>>>>>> master
     // End of variables declaration//GEN-END:variables
     
     
@@ -465,21 +428,5 @@ public class chat extends javax.swing.JFrame {
         modelo.addElement("Conversación");
         listaConversaciones.setModel(modelo);
         
-    }
-    
-    private void EliminarConversacion() {
-        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
-        
-        //Comprobamos que haya algo seleccionado
-        if (indice >= 0) {
-            String mensaje = "¿Estás seguro de eliminar esta conversación?";
-            int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
-                JOptionPane.YES_NO_OPTION);
-
-            if (resp == 0) {
-                DefaultListModel modelo = (DefaultListModel) listaConversaciones.getModel();
-                modelo.remove(indice);
-            }
-        }
     }
 }

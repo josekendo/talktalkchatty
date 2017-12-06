@@ -105,11 +105,6 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="372" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-=======
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -141,7 +136,6 @@
                       <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
               </Group>
->>>>>>> master
           </Group>
       </Group>
     </DimensionLayout>
@@ -149,11 +143,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane2" max="32767" attributes="0"/>
-                  <Component id="jPanel1" max="32767" attributes="0"/>
-=======
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
@@ -181,7 +170,6 @@
                           </Group>
                       </Group>
                   </Group>
->>>>>>> master
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -206,9 +194,6 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-              <EmptySpace min="0" pref="350" max="32767" attributes="0"/>
-=======
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jScrollPane4" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -217,7 +202,6 @@
                       <Component id="botonEliminar" max="32767" attributes="0"/>
                   </Group>
               </Group>
->>>>>>> master
           </Group>
         </DimensionLayout>
       </Layout>
@@ -281,9 +265,6 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-<<<<<<< HEAD
-        <Component class="javax.swing.JEditorPane" name="jEditorPane2">
-=======
         <Component class="javax.swing.JEditorPane" name="pantalla">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
@@ -315,7 +296,6 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="cosaPrueba"/>
           </AccessibilityProperties>
->>>>>>> master
         </Component>
       </SubComponents>
     </Container>
