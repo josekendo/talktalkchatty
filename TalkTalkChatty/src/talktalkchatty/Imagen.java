@@ -14,12 +14,14 @@ import javax.swing.ImageIcon;
  * @author Marinés
  */
 public class Imagen extends javax.swing.JPanel { 
-        public Imagen() { 
+        private String dir;
+        public Imagen(String imagen) { 
             this.setSize(100, 100); //se selecciona el tamaño del panel 
         } 
         
-        public Imagen(int x, int y) { 
+        public Imagen(int x, int y, String imagen) { 
             this.setSize(x, y); //se selecciona el tamaño del panel 
+            dir = imagen;
         }
  
         //Se crea un método cuyo parámetro debe ser un objeto Graphics 
@@ -27,7 +29,7 @@ public class Imagen extends javax.swing.JPanel {
             Dimension height = getSize(); 
  
             //Se selecciona la imagen que tenemos en el paquete de la //ruta del programa 
-            ImageIcon Img = new ImageIcon(getClass().getResource("logoTTC.png"));  
+            ImageIcon Img = new ImageIcon(getClass().getResource(dir));  
  
             //se dibuja la imagen que tenemos en el paquete Images //dentro de un panel 
             grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null); 
