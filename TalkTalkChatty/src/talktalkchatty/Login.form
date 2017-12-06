@@ -56,6 +56,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JPasswordField" name="password">
+      <Properties>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="acceder"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="129" y="223" width="130" height="-1"/>
@@ -65,6 +70,9 @@
     <Component class="javax.swing.JButton" name="acceder">
       <Properties>
         <Property name="text" type="java.lang.String" value="Acceder"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="registro1"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accederActionPerformed"/>
@@ -112,6 +120,9 @@
           <Color id="Cursor Por defecto"/>
         </Property>
         <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="user"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="forgotActionPerformed"/>
@@ -123,6 +134,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="user">
+      <Properties>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="password"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="129" y="182" width="130" height="-1"/>
@@ -149,6 +165,9 @@
     <Component class="javax.swing.JButton" name="registro1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reg&#xed;strate"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="forgot"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registro1ActionPerformed"/>

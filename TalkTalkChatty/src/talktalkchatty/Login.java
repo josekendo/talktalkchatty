@@ -62,9 +62,12 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password: ");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 217, 94, 34));
+
+        password.setNextFocusableComponent(acceder);
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 223, 130, -1));
 
         acceder.setText("Acceder");
+        acceder.setNextFocusableComponent(registro1);
         acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accederActionPerformed(evt);
@@ -91,12 +94,15 @@ public class Login extends javax.swing.JFrame {
         forgot.setText("<html><p style='text-align:center';>He olvidado</p><p>mi contraseña</p></html>");
         forgot.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         forgot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        forgot.setNextFocusableComponent(user);
         forgot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 forgotActionPerformed(evt);
             }
         });
         getContentPane().add(forgot, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 130, 56));
+
+        user.setNextFocusableComponent(password);
         getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 182, 130, -1));
 
         wrong.setVisible(false);
@@ -106,6 +112,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(wrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 317, -1, -1));
 
         registro1.setText("Regístrate");
+        registro1.setNextFocusableComponent(forgot);
         registro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registro1ActionPerformed(evt);

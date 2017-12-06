@@ -274,10 +274,6 @@ public class chat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEliminarActionPerformed
-
     private void botonAnyadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnyadirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonAnyadirActionPerformed
@@ -298,23 +294,6 @@ public class chat extends javax.swing.JFrame {
         // Cargar los textos de esta conversación
         //CargarConversacion();
     }//GEN-LAST:event_listaConversacionesMouseClicked
-
-    private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
-        
-        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
-        
-        //Comprobamos que haya algo seleccionado
-        if (indice >= 0) {
-            String mensaje = "¿Estás seguro de eliminar esta conversación?";
-            int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
-                JOptionPane.YES_NO_OPTION);
-
-            if (resp == 0) {
-                DefaultListModel modelo = (DefaultListModel) listaConversaciones.getModel();
-                modelo.remove(indice);
-            }
-        }
-    }//GEN-LAST:event_botonEliminarMouseClicked
 
     private void botonEmojiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEmojiActionPerformed
         // TODO add your handling code here:
@@ -337,6 +316,10 @@ public class chat extends javax.swing.JFrame {
             System.out.println("File access cancelled by user.");
         }   
     }//GEN-LAST:event_botonAdjuntarActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        EliminarConversacion();
+    }//GEN-LAST:event_botonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,5 +411,21 @@ public class chat extends javax.swing.JFrame {
         modelo.addElement("Conversación");
         listaConversaciones.setModel(modelo);
         
+    }
+    
+    private void EliminarConversacion() {
+        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
+        
+        //Comprobamos que haya algo seleccionado
+        if (indice >= 0) {
+            String mensaje = "¿Estás seguro de eliminar esta conversación?";
+            int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
+                JOptionPane.YES_NO_OPTION);
+
+            if (resp == 0) {
+                DefaultListModel modelo = (DefaultListModel) listaConversaciones.getModel();
+                modelo.remove(indice);
+            }
+        }
     }
 }
