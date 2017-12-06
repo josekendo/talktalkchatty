@@ -64,27 +64,37 @@ public class hilo extends Thread {
                 {
                     if(accion.split("#odin@").length >= 2 && accion.split("#odin@")[0].compareToIgnoreCase("Sbienvenida")== 0)
                     {
-                        System.out.println("El servidor te da la bievenida y su clave publica");
+                        System.out.println("recibimos su publica");
                         this.clave_publica = padre.recuperarSE().loadcp_externa(accion.split("#odin@")[1]);
                         //ahora encriptamos con su publica nuestra clave publica 
                         String mensaje = "Cbienvenida"+"#odin@"+padre.recuperarSE().getClavePublica_envio();
-                        dos.writeUTF(padre.recuperarSE().encriptarPublica(this.clave_publica, mensaje));
+                        dos.writeUTF(mensaje);
+                        System.out.println("enviamos nuestra publica");
                     }
-                    else if(padre.recuperarSE().desencriptarPrivada(accion).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarPrivada(accion).split("#odin@")[0].compareToIgnoreCase("CVok") == 0)//el servidor te envia una clave aes CVok
+                    else if(padre.recuperarSE().desencriptarPrivada(accion) != null && padre.recuperarSE().desencriptarPrivada(accion).contains("#odin@") && padre.recuperarSE().desencriptarPrivada(accion).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarPrivada(accion).split("#odin@")[0].compareToIgnoreCase("CVok") == 0)//el servidor te envia una clave aes CVok
                     {
-                        System.out.println("recibimos la aes del servidor");
+                        System.out.println("recibimos la aes de session del servidor");
                         String partes [] = padre.recuperarSE().desencriptarPrivada(accion).split("#odin@");
                         this.clave_session = padre.recuperarSE().loadcs_externa(partes[1]);
                         String mensaje = "CSok#odin@"+padre.recuperarSE().getClaveSession_envio();
-                        dos.writeUTF(padre.recuperarSE().encriptarPublica(this.clave_publica,padre.recuperarSE().desencriptarAes(clave_session, mensaje)));
+                        dos.writeUTF(padre.recuperarSE().encriptarPublica(this.clave_publica,mensaje));
+                        System.out.println("enviamos nuestra aes de session");
                     }
-                    else if(accion.contains("SAES"))//el servidor te envia una clave aes
+                    else if(padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@")[0].compareToIgnoreCase("CONFISECURITY") == 0)//el servidor te envia una clave aes
                     {
-                        System.out.println("Recepcion de AES");                    
+                        System.out.println("Conexion segura establecida");
                     }
-                    else if(accion.contains("men#@"))
+                    else if(padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@")[0].compareToIgnoreCase("existEmail") == 0)
                     {
-                        System.out.println("Recepcion de mensaje");                              
+                        String partes [] = padre.recuperarSE().desencriptarMiSessionSuSession(accion,this.clave_session).split("#odin@");
+                        if(partes[1].compareToIgnoreCase("true") == 0)
+                        {
+                            System.out.println("Si existe");
+                        }
+                        else
+                        {
+                            System.out.println("No existe");
+                        }
                     }
                     else
                     {
