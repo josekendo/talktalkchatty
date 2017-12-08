@@ -9,12 +9,19 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 
 /**
@@ -184,4 +191,65 @@ public class almacenamiento {
         }
         return null;
     }
-}
+    //comprime audio,video o sonido y devuelve un string que esta codificado con el aes del receptor 
+    public String comprimir(String rutaArchivo, seguridad seg)
+    {
+        boolean esta = true;
+        int numeroRandom = 0;
+        while(esta)
+        {
+            numeroRandom =(int) Math.floor(Math.random()*1000);
+            File arc = new File("sec"+numeroRandom+".zip");
+            if(!arc.exists())
+            {
+                esta = false;
+            }
+        }
+        try
+        {
+            ZipOutputStream os = new ZipOutputStream(new FileOutputStream("sec"+numeroRandom+".zip"));//asginamos un archivo temporal
+            File archivo = new File(rutaArchivo);
+            String extension = archivo.getName();
+            extension = extension.substring(extension.lastIndexOf(".")+1);
+            System.out.print("se va a comprimir el archivo ->"+"archivo."+extension);
+            ZipEntry entrada = new ZipEntry("archivo."+extension);
+            os.putNextEntry(entrada);
+            FileInputStream fis = new FileInputStream(rutaArchivo);
+            byte [] buffer = new byte[1024];
+            int leido=0;
+            while (0 < (leido=fis.read(buffer))){
+               os.write(buffer,0,leido);
+            }
+            fis.close();
+            os.closeEntry();
+            os.close();
+            System.out.print(" [ok] se termino la compresion vamos a encriptarlo con el aes del usuario");
+            Path path = Paths.get("sec"+numeroRandom+".zip");
+            byte[] data = Files.readAllBytes(path);
+            String foto = "";
+            boolean primero= true;
+            for(byte a:data)
+            {
+                if(primero)
+                {
+                    foto = foto+Integer.toHexString(0xFF & a);
+                    primero = false;
+                }
+                else
+                {
+                    foto = foto+","+Integer.toHexString(0xFF & a);
+                }
+            }
+            System.out.print("\nAgrupado [ok]");
+            File fichero = new File("sec"+numeroRandom+".zip");
+            fichero.delete();
+            System.out.print("\nEliminacion [ok]");
+            return foto;
+        }catch(IOException ex)
+        {
+            System.out.println("Ha ocurrido un error durante la compresion\n "+ex);
+        }
+        
+        return null;
+    }
+    }

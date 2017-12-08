@@ -15,6 +15,7 @@ public class Login extends javax.swing.JFrame {
      */
     private seguridad se;
     private almacenamiento al;
+    private conexion co;
     
     public Login() {
         initComponents();
@@ -28,11 +29,11 @@ public class Login extends javax.swing.JFrame {
         se.crearrsa();
         al = new almacenamiento();
         String infoConexion [] = al.recuperarInfoConexion();
-        conexion co = new conexion(infoConexion[0],Integer.parseInt(infoConexion[1]));
+        co = new conexion(infoConexion[0],Integer.parseInt(infoConexion[1]));
         co.nuevaconexion(se);
     }
 
-    public Login(seguridad seg) {
+    public Login(seguridad seg, conexion con) {
         initComponents();
         Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth(),"logoTTC.png");
         jPanel1.add(Imagen);
@@ -40,6 +41,20 @@ public class Login extends javax.swing.JFrame {
         wrong.setVisible(false);
         //conectamos con el servidor 
         se = seg;
+        co = con;
+    }
+    
+    public Login(seguridad seg, conexion con,String em) {
+        initComponents();
+        Imagen Imagen = new Imagen(jPanel1.getHeight(), jPanel1.getWidth(),"logoTTC.png");
+        jPanel1.add(Imagen);
+        jPanel1.repaint();
+        wrong.setVisible(false);
+        //conectamos con el servidor 
+        se = seg;
+        co = con;
+        this.user.setText(em);
+        this.password.hasFocus();
     }
 
 
@@ -108,7 +123,7 @@ public class Login extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 18, -1, -1));
 
-        forgot.setText("<html><p style='text-align:center';>He olvidado</p><p>mi contraseña</p></html>");
+        forgot.setText("¿Password?");
         forgot.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         forgot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         forgot.setNextFocusableComponent(user);
@@ -151,21 +166,28 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //Buscar el nick en la "Base de datos"
-        String nick = "pepe";
-        String pass = "1234";
-
-
-        if(!user.getText().equals("") && !password.getText().equals("")&& nick.equals(user.getText()) && pass.equals(password.getText())){
-            java.awt.EventQueue.invokeLater(() -> {
-                new chat().setVisible(true);
-            });
-            this.setVisible(false);
-        }else{
+        wrong.setVisible(false);
+        se.crearSecreta(se.sha512(new String(this.password.getPassword())));
+        co.login(this.user.getText(),se.sha512(new String(this.password.getPassword())),this);
+        
+    }//GEN-LAST:event_accederActionPerformed
+    
+    public void contestLogin(String id,String nombre,String foto)
+    {
+        System.out.println(id);
+        if(id.compareTo("00") != 0)
+        {
+            //aqui nos logeamos
+            chat nuevo = new chat();//pasamos foto, nombre,id,email, tambien la verificacion
+            System.out.println("correcto");            
+        }
+        else
+        {
+            System.out.println("incorrecto");
             wrong.setVisible(true);
         }
-
-    }//GEN-LAST:event_accederActionPerformed
-
+    }
+    
     private void forgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
@@ -182,7 +204,7 @@ public class Login extends javax.swing.JFrame {
     private void registro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro1ActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new registro(se).setVisible(true);
+            new registro(se,co).setVisible(true);
             
         });
         this.setVisible(false);

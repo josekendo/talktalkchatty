@@ -6,6 +6,9 @@
 
 package talktalkchatty;
 
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,9 +21,12 @@ public class registro extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     private seguridad se;
-    public registro(seguridad seg) {
+    private conexion co;
+    
+    public registro(seguridad seg, conexion con) {
         initComponents();
         se = seg;
+        co = con;
     }
 
     /**
@@ -232,7 +238,7 @@ public class registro extends javax.swing.JFrame {
 
     private void botonVolverLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverLoginActionPerformed
         // TODO add your handling code here:
-                new Login(se).setVisible(true); 
+                new Login(se,co).setVisible(true); 
                 this.dispose();
     }//GEN-LAST:event_botonVolverLoginActionPerformed
 
@@ -284,22 +290,58 @@ public class registro extends javax.swing.JFrame {
             }
         }
         if(iguales){
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new Login(se).setVisible(true);
-                }
-            });
-            this.setVisible(false);
-            }
-
+                    //email, nombre, password, foto
+                    campoEmail.setEditable(false);
+                    campoNombreUsuario.setEditable(false);
+                    jPasswordField1.setEditable(false);
+                    jPasswordField2.setEditable(false);
+                    almacenamiento al = new almacenamiento();
+                    wrongRegistro.setText("Se esta registrando... Espere please..");
+                    se.crearSecreta(se.sha512(new String(jPasswordField1.getPassword())));
+                    String fotoEncriptada = al.comprimir(campoDireccionFoto.getText(), se);
+                    co.registro(this.campoEmail.getText(),this.campoNombreUsuario.getText(),se.sha512(new String(jPasswordField1.getPassword())),fotoEncriptada, this);
+                    //co.registro(campoEmail.getText(),campoNombreUsuario.getText(),se.sha512(password));
+                    //new Login(se,co).setVisible(true);
+        }      
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
     private void campoEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEmailKeyReleased
         // TODO add your handling code here:
         //comprobamos que el email es valido
-        System.out.println("se a quitado el presionar boton");
+        co.comprobarEmail(campoEmail.getText(), this);
     }//GEN-LAST:event_campoEmailKeyReleased
 
+    public void contestEmail(String email,boolean estado)
+    {
+        if(estado && campoEmail.getText().compareToIgnoreCase(email) == 0)
+        {
+             wrongRegistro.setText("Esta disponible");
+        }
+        else
+        {
+            wrongRegistro.setText("No esta disponible este email");
+        }
+    }
+    
+    public void contestRegistro(String id)
+    {
+        try {
+            if(id.compareToIgnoreCase("00") != 0)
+            {
+                wrongRegistro.setForeground(Color.BLUE);
+                wrongRegistro.setText("Registro Correcto, Pasando a Login ----->");
+                Thread.sleep(4000);
+                new Login(se,co,this.campoEmail.getText()).setVisible(true);
+                this.dispose();
+            }
+            else
+            {
+                wrongRegistro.setText("Ha ocurrido un error, intentelo mas tarde.");
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */

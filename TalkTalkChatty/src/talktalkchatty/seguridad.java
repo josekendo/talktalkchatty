@@ -52,9 +52,9 @@ public class seguridad {
         this.clavePublica = null;
         this.claveSecreta = null;
         this.claveSession = null;
-        this.clave_session = new ArrayList();
-        this.nombre = new ArrayList();
-        this.claves_publicas = new ArrayList();
+        this.clave_session = new ArrayList<>();
+        this.nombre = new ArrayList<String>();
+        this.claves_publicas = new ArrayList<>();
     }
     
     //genera un par de claves nuevas(solo ejecutar si no se encuentra archivo de inicio)
@@ -261,6 +261,12 @@ public class seguridad {
         return this.claveSession;//devolvemos nuestra clave publica
     }
     
+        //recuperamos nuestra clave secreta generada al arrancar el cliente o el servidor con su password
+    public Key getClaveSecreta()
+    {
+        return this.claveSecreta;//devolvemos nuestra clave publica
+    }
+    
     //devolvemos nuestra clave publica generada la primera ejecucion para enviarla a un cliente o servidor
     public String getClaveSession_envio()
     {
@@ -391,6 +397,18 @@ public class seguridad {
     //creamos un usuario(id) y su clave publica y privada
     public void crearUser(String n,Key session, PublicKey publica)
     {
+        if(this.nombre == null)
+        {
+            this.nombre = new ArrayList<String>(); 
+        }
+        if(this.clave_session == null)
+        {
+            this.clave_session = new ArrayList<Key>(); 
+        }
+        if(this.claves_publicas == null)
+        {
+            this.claves_publicas = new ArrayList<PublicKey>(); 
+        }
         this.nombre.add(n);
         this.clave_session.add(session);//esto se agrega cuando tenemos su id del server
         this.claves_publicas.add(publica);//esto se agrega cuando tenemos su id del server

@@ -10,6 +10,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +24,8 @@ public class conexion {
     protected DataOutputStream salida;
     protected DataInputStream entrada;
     private seguridad se;
+    private registro re;
+    private Login lo;
     //inicializamos el objeto conexion(unico) pasandole la ip y el puerto
     public conexion(String ipp, int puertop) 
     {
@@ -110,8 +114,68 @@ public class conexion {
     {
         return se;
     }
-    //comprobar email 
-    public void comprobaremail(String email)
+    
+    
+    
+    // ------------------------ Registro
+    //comprobar envia una peticion al servidor para comprobar la disponibilidad de ese correo 
+    public void comprobarEmail(String email,registro res)
     {
+        try {
+            String mensaje = "existEmail"+"#odin@"+email;
+            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+            salida.writeUTF(mensaje); 
+            re = res;
+        } catch (IOException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    //cuando se devuelve la peticion de comprobaremail se llama a este funcion
+    public void contestEmail(String email, boolean estado)
+    {
+        if(re != null)
+        {
+            re.contestEmail(email, estado);
+        }
+    }
+    //enviamos una peticion de registro
+    public void registro(String email,String nombre, String password, String foto,registro res)
+    {
+        try {
+            re = res;
+            String mensaje = "RegistroUser"+"#odin@"+email+"#odin@"+nombre+"#odin@"+password;
+            System.out.println(mensaje);
+            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+            mensaje = mensaje+"#hela@"+foto;
+            System.out.print(salida.size());
+            salida.writeUTF(mensaje);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //
+    public void contestRegistro(String id)
+    {
+        re.contestRegistro(id);
+    }
+    // -------------------------Fin registro
+    //login
+    public void login(String nombre, String pass, Login log)
+    {
+        try {
+            lo = log;
+            String mensaje = "LoginUser"+"#odin@"+nombre+"#odin@"+pass;
+            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje); 
+            salida.writeUTF(mensaje);
+        } catch (IOException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void contestLogin(String nombre, String id, String foto)
+    {
+        lo.contestLogin(id, nombre, foto);
+    }
+    //fin login
 }
