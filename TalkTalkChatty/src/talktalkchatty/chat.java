@@ -27,11 +27,14 @@ public class chat extends javax.swing.JFrame {
     private String foto;
     DefaultListModel modelo;
 
-    public chat(conexion con, seguridad seg) 
+    public chat(conexion con, seguridad seg, String ids, String nom, String photo) 
     {
         initComponents();
         co = con;
         se = seg;
+        id = ids;
+        nombre = nom;
+        foto = photo;
         //AQUI imagen conversacion
         Imagen imgUsu = new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),"logoTTC.png");
         panelImgConversacion.add(imgUsu);
@@ -449,7 +452,7 @@ public class chat extends javax.swing.JFrame {
     private void abrirPerfilPropio(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirPerfilPropio
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new Perfil(se,co).setVisible(true);
+            new Perfil(se,co,id,nombre,foto).setVisible(true);
             
         });
         this.setVisible(false);
@@ -471,6 +474,8 @@ public class chat extends javax.swing.JFrame {
             //aqui agregamos el contacto o grupo al listado
             this.modelo.addElement(nombre);
             this.CargarListaConversaciones();
+            //creamos su apartado de chat
+            
             }
             else
             {
