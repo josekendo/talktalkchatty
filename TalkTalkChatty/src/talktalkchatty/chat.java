@@ -5,10 +5,17 @@
  */
 package talktalkchatty;
 
+import com.sun.glass.events.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.html.HTMLDocument;
 
 /**
  *
@@ -27,14 +34,28 @@ public class chat extends javax.swing.JFrame {
     private String foto;
     DefaultListModel modelo;
 
-    public chat(conexion con, seguridad seg, String ids, String nom, String photo) 
+    public chat(conexion con, seguridad seg, String ids, String nom, String photo, String e) 
     {
         initComponents();
         co = con;
         se = seg;
         id = ids;
         nombre = nom;
+        email = e;
+        this.nomPerfil.setText(nombre);
         foto = photo;
+        almacenamiento al = new almacenamiento();
+        
+        if(al.existeUsuarioLocal(email))
+        {
+        
+        }
+        else
+        {
+            al.crearNuevoUsuarioLocal(email, email, nombre, foto, id);
+        }
+        
+        al.descomprimir(photo,email+"/archivo.temp",email+"/");
         //AQUI imagen conversacion
         Imagen imgUsu = new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),"logoTTC.png");
         panelImgConversacion.add(imgUsu);
@@ -240,6 +261,12 @@ public class chat extends javax.swing.JFrame {
         });
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        inputTexto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputTextoKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(inputTexto);
         inputTexto.getAccessibleContext().setAccessibleName("cosaPrueba");
 
@@ -375,7 +402,7 @@ public class chat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEnviarMouseClicked
-        // TODO add your handling code here:
+            this.pantalla.setText(pantalla.getDocument()+"<p align=\"left\">"+this.inputTexto.getText()+"</p>");
     }//GEN-LAST:event_botonEnviarMouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -452,7 +479,7 @@ public class chat extends javax.swing.JFrame {
     private void abrirPerfilPropio(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirPerfilPropio
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new Perfil(se,co,id,nombre,foto).setVisible(true);
+            new Perfil(se,co,id,nombre,foto,email).setVisible(true);
             
         });
         this.setVisible(false);
@@ -464,6 +491,14 @@ public class chat extends javax.swing.JFrame {
             co.searchUser(ids, this);
     }//GEN-LAST:event_botonAnyadirMouseClicked
 
+    private void inputTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTextoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            this.agregarNueva();
+        }
+    }//GEN-LAST:event_inputTextoKeyPressed
+
     public void contestSearchUser(String ids,String nombre,String confirmacion, String foto)
     {
         System.out.println(ids);
@@ -474,8 +509,9 @@ public class chat extends javax.swing.JFrame {
             //aqui agregamos el contacto o grupo al listado
             this.modelo.addElement(nombre);
             this.CargarListaConversaciones();
+            almacenamiento al = new almacenamiento();
+            al.crearConversacion(email, ids, nombre, foto);
             //creamos su apartado de chat
-            
             }
             else
             {
@@ -530,6 +566,18 @@ public class chat extends javax.swing.JFrame {
         
     }
 
+    private void agregarNueva()
+    {
+        try {
+            HTMLDocument d = (HTMLDocument) pantalla.getDocument();
+            Element elem = null;
+            d.insertAfterEnd(elem, "nuncajama");
+        } catch (BadLocationException ex) {
+            Logger.getLogger(chat.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(chat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private int SacarNumeroMiembrosGrupo(int indice, String grupo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

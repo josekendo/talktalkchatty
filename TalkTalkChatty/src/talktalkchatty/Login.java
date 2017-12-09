@@ -178,7 +178,7 @@ public class Login extends javax.swing.JFrame {
         if(id.compareTo("00") != 0)
         {
             //aqui nos logeamos
-            chat nuevo = new chat(this.co,this.se,id,nombre,foto);//pasamos foto, nombre,id,email, tambien la verificacion
+            chat nuevo = new chat(this.co,this.se,id,nombre,foto,this.user.getText());//pasamos foto, nombre,id,email, tambien la verificacion
             nuevo.setVisible(true);
             this.dispose();
             System.out.println("correcto");            

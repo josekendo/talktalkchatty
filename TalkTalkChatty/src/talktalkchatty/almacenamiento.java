@@ -15,12 +15,14 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 
@@ -277,5 +279,43 @@ public class almacenamiento {
             System.out.print(ex);
         }
     }
-    
+    //metodo de descompilar
+    public void descomprimir(String bites,String archivoDestino, String dire)
+    {
+        String bitesr []= bites.split(",");
+        byte [] bitesv= new byte[bitesr.length];
+        boolean primero= true;
+        int contador = 0;
+        for(String a:bitesr)
+        {
+                bitesv[contador]=(byte)Integer.parseInt(a,16);              
+                contador++;
+        }
+        try
+        {
+        OutputStream out = new FileOutputStream(archivoDestino);
+        out.write(bitesv);
+        out.close(); 
+        
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(archivoDestino));
+        ZipEntry entrada;
+        while (null != (entrada=zis.getNextEntry()) ){
+           System.out.println(entrada.getName());
+
+           FileOutputStream fos = new FileOutputStream(dire+entrada.getName());
+           int leido;
+           byte [] buffer = new byte[1024];
+           while (0<(leido=zis.read(buffer))){
+              fos.write(buffer,0,leido);
+           }
+           fos.close();
+           zis.closeEntry();
+        }
+        zis.close();
+        }catch(Exception ex)
+        {
+            System.out.println(ex);
+        }
+    }
+    //metodo buscar todas las conversaciones
     }

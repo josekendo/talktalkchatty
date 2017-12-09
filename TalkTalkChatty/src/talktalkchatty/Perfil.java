@@ -25,11 +25,13 @@ public class Perfil extends javax.swing.JFrame {
     private String id;
     private String nombre;
     private String foto;
-    public Perfil(seguridad seg, conexion con, String ids, String nom, String photo) {
+    private String email;
+    public Perfil(seguridad seg, conexion con, String ids, String nom, String photo,String e) {
         initComponents();
         se = seg;
         co = con;
         id = ids;
+        email = e;
         nombre = nom;
         foto = photo;
         Imagen foto = new Imagen(fotoPerfil.getHeight(), fotoPerfil.getWidth(),"logoTTC.png");
@@ -43,7 +45,7 @@ public class Perfil extends javax.swing.JFrame {
         fotoPerfil1.setVisible(false);
         
         
-        inputName.setText("NOMBRE");
+        inputName.setText(nombre);
         
     }
 
@@ -193,7 +195,7 @@ public class Perfil extends javax.swing.JFrame {
         //Cancela
         JOptionPane.showMessageDialog(this, "No se han realizado cambios");
         java.awt.EventQueue.invokeLater(() -> {
-            new chat(co,se,id,nombre,foto).setVisible(true);
+            new chat(co,se,id,nombre,foto,email).setVisible(true);
             
         });
         this.setVisible(false);
@@ -258,7 +260,7 @@ public class Perfil extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, "Tus datos han sido guardados");
         java.awt.EventQueue.invokeLater(() -> {
-            new chat(co,se,id,nombre,foto).setVisible(true);
+            new chat(co,se,id,nombre,foto,email).setVisible(true);
         });
         this.setVisible(false);
         
