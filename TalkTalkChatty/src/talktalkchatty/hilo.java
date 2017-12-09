@@ -103,6 +103,20 @@ public class hilo extends Thread {
                         //id nombre foto
                         padre.contestLogin(partes[2],partes[1], foto);
                     }
+                    else if(accion.contains("#hela@") && padre.recuperarSE().desencriptarMiSessionSuSession(accion.split("#hela@")[0], clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion.split("#hela@")[0], clave_session).split("#odin@")[0].compareToIgnoreCase("searchUser") == 0)
+                    {
+                        System.out.println("entro aqui");
+                        String partes [] = padre.recuperarSE().desencriptarMiSessionSuSession(accion.split("#hela@")[0],this.clave_session).split("#odin@");
+                        String fototito = "";
+                        if(accion.split("#hela@").length > 1)
+                        {
+                           fototito  = accion.split("#hela@")[1];
+                        }
+                        System.out.println(accion);
+                        //id nombre foto
+                        System.out.println(partes[3]);
+                        padre.contestSearchUser(partes[1], partes[2], partes[3], fototito);
+                    }
                     else
                     {
                        System.out.println("mensaje no reconocido -> "+accion);

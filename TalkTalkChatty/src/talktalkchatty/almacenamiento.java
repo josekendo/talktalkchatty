@@ -252,4 +252,30 @@ public class almacenamiento {
         
         return null;
     }
+    //sirve para crear la estructura basica de una conversacion que es email/id/conversacion
+    //tambien tiene archivo email/id/infoUser que es del usuario con el que se tiene la conversacion
+    //conversacion contiene tu id - mensaje, su id - mensaje
+    public void crearConversacion(String tuemail, String id,String nombre,String foto)
+    {
+        String ruta = tuemail+"/"+id+"/conversacion";
+        String ruta2 = tuemail+"/"+id+"/infoUser";
+        File archivo2 = new File(ruta2);
+        File archivo = new File(ruta);
+        try
+        {
+        archivo.createNewFile();
+        archivo2.createNewFile();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(archivo2));
+        bw.write(id);
+        bw.newLine();
+        bw.write(nombre);
+        bw.newLine();
+        bw.write(foto);
+        bw.newLine();
+        }catch(IOException ex)
+        {
+            System.out.print(ex);
+        }
+    }
+    
     }

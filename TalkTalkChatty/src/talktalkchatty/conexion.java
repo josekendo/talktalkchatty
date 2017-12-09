@@ -26,6 +26,7 @@ public class conexion {
     private seguridad se;
     private registro re;
     private Login lo;
+    private chat ch;
     //inicializamos el objeto conexion(unico) pasandole la ip y el puerto
     public conexion(String ipp, int puertop) 
     {
@@ -178,4 +179,22 @@ public class conexion {
         lo.contestLogin(id, nombre, foto);
     }
     //fin login
+    //chat
+    public void searchUser(String ids, chat cha)
+    {
+        try {
+            ch = cha;
+            String mensaje = "searchUser"+"#odin@"+ids;
+            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+            System.out.println("comprobando usuario");
+            salida.writeUTF(mensaje);
+        } catch (IOException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void contestSearchUser(String id,String nombre, String confirmacion, String foto)
+    {
+        ch.contestSearchUser(id,nombre,confirmacion,foto);
+    }
 }

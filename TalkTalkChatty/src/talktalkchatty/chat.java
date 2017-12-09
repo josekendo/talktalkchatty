@@ -19,9 +19,19 @@ public class chat extends javax.swing.JFrame {
     /**
      * Creates new form chat
      */
-    public chat() {
+    private conexion co;
+    private seguridad se;
+    private String nombre;
+    private String email;
+    private String id;
+    private String foto;
+    DefaultListModel modelo;
+
+    public chat(conexion con, seguridad seg) 
+    {
         initComponents();
-        
+        co = con;
+        se = seg;
         //AQUI imagen conversacion
         Imagen imgUsu = new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),"logoTTC.png");
         panelImgConversacion.add(imgUsu);
@@ -33,7 +43,7 @@ public class chat extends javax.swing.JFrame {
         imagenPerfil.repaint();
         
         // Preparada para anyadir usuarios y conversaciones
-        CargarListaConversaciones();
+        modelo = new DefaultListModel();
     }
 
     /**
@@ -100,6 +110,11 @@ public class chat extends javax.swing.JFrame {
         botonAnyadir.setMaximumSize(new java.awt.Dimension(35, 35));
         botonAnyadir.setMinimumSize(new java.awt.Dimension(35, 35));
         botonAnyadir.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonAnyadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonAnyadirMouseClicked(evt);
+            }
+        });
         botonAnyadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAnyadirActionPerformed(evt);
@@ -166,7 +181,7 @@ public class chat extends javax.swing.JFrame {
                 .addComponent(imagenPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nomPerfil)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PerfilLayout.setVerticalGroup(
             PerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,6 +226,7 @@ public class chat extends javax.swing.JFrame {
         );
 
         pantalla.setEditable(false);
+        pantalla.setContentType("text/html"); // NOI18N
         jScrollPane2.setViewportView(pantalla);
 
         botonEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/sendIconMini.png"))); // NOI18N
@@ -391,7 +407,6 @@ public class chat extends javax.swing.JFrame {
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
         
         int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
-        
         //Comprobamos que haya algo seleccionado
         if (indice >= 0) {
             String mensaje = "¿Estás seguro de eliminar esta conversación?";
@@ -434,54 +449,43 @@ public class chat extends javax.swing.JFrame {
     private void abrirPerfilPropio(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirPerfilPropio
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new Perfil().setVisible(true);
+            new Perfil(se,co).setVisible(true);
             
         });
         this.setVisible(false);
     }//GEN-LAST:event_abrirPerfilPropio
 
+    private void botonAnyadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnyadirMouseClicked
+            // TODO add your handling code here:
+            String ids = JOptionPane.showInputDialog(this,"Agregue el id del usuario o correo(sin #):");
+            co.searchUser(ids, this);
+    }//GEN-LAST:event_botonAnyadirMouseClicked
+
+    public void contestSearchUser(String ids,String nombre,String confirmacion, String foto)
+    {
+        System.out.println(ids);
+        if(confirmacion.contains("true"))
+        {
+            if(!this.modelo.contains(nombre))
+            {
+            //aqui agregamos el contacto o grupo al listado
+            this.modelo.addElement(nombre);
+            this.CargarListaConversaciones();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"El usuario o grupo "+nombre+" ya esta en tu lista de chat activos.");
+            }
+        }
+        else
+        {
+            //mostramos mensaje de error
+            JOptionPane.showMessageDialog(this,"El usuario o grupo  -> "+ids+" no existe.");
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new chat().setVisible(true);
-            }
-        });
-        
-        /*botonEnviar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                        //ComprobarIpPuerto(textFieldIpServidor.getText());
-                }
-        });*/
-        
-        
-    }
     
     
 
@@ -518,7 +522,7 @@ public class chat extends javax.swing.JFrame {
     
     
     private void CargarConversacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     private int SacarNumeroMiembrosGrupo(int indice, String grupo) {
@@ -526,13 +530,6 @@ public class chat extends javax.swing.JFrame {
     }
     
     private void CargarListaConversaciones() {
-        DefaultListModel modelo = new DefaultListModel();
-        modelo.addElement("Maria");
-        modelo.addElement("Perez");
-        modelo.addElement("Grupo 1");
-        modelo.addElement("Grupo 2");
-        modelo.addElement("Conversación");
-        listaConversaciones.setModel(modelo);
-        
+        listaConversaciones.setModel(modelo);    
     }
 }
