@@ -102,10 +102,14 @@ public class chat extends javax.swing.JFrame {
         botonMenu = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        env_imgagen = new javax.swing.JMenuItem();
+        env_video = new javax.swing.JMenuItem();
+        env_audio = new javax.swing.JMenuItem();
+        env_documento = new javax.swing.JMenuItem();
+        edit_perfil = new javax.swing.JMenuItem();
+        new_grupo = new javax.swing.JMenuItem();
+        del_grupo = new javax.swing.JMenuItem();
+        chg_foto_grupo = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout adjuntarFrameLayout = new javax.swing.GroupLayout(adjuntarFrame.getContentPane());
         adjuntarFrame.getContentPane().setLayout(adjuntarFrameLayout);
@@ -309,23 +313,59 @@ public class chat extends javax.swing.JFrame {
             }
         });
 
-        menuArchivo.setText("Archivo");
+        menuArchivo.setText("Opciones");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem1.setText("Enviar imagen");
-        menuArchivo.add(jMenuItem1);
+        env_imgagen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
+        env_imgagen.setText("Enviar imagen");
+        env_imgagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                env_imgagenActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(env_imgagen);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem2.setText("Enviar vídeo");
-        menuArchivo.add(jMenuItem2);
+        env_video.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_MASK));
+        env_video.setText("Enviar vídeo");
+        menuArchivo.add(env_video);
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem3.setText("Enviar audio");
-        menuArchivo.add(jMenuItem3);
+        env_audio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        env_audio.setText("Enviar audio");
+        menuArchivo.add(env_audio);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem4.setText("Enviar documento");
-        menuArchivo.add(jMenuItem4);
+        env_documento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.SHIFT_MASK));
+        env_documento.setText("Enviar documento");
+        menuArchivo.add(env_documento);
+
+        edit_perfil.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
+        edit_perfil.setText("Editar perfil");
+        edit_perfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit_perfilActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(edit_perfil);
+
+        new_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
+        new_grupo.setText("Nuevo grupo");
+        new_grupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new_grupoActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(new_grupo);
+
+        del_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK));
+        del_grupo.setText("Borrar grupo");
+        menuArchivo.add(del_grupo);
+
+        chg_foto_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
+        chg_foto_grupo.setText("Cambiar foto de grupo");
+        chg_foto_grupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chg_foto_grupoActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(chg_foto_grupo);
 
         jMenuBar1.add(menuArchivo);
 
@@ -499,6 +539,22 @@ public class chat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputTextoKeyPressed
 
+    private void env_imgagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_env_imgagenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_env_imgagenActionPerformed
+
+    private void edit_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_perfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edit_perfilActionPerformed
+
+    private void new_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_grupoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_new_grupoActionPerformed
+
+    private void chg_foto_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chg_foto_grupoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chg_foto_grupoActionPerformed
+
     public void contestSearchUser(String ids,String nombre,String confirmacion, String foto)
     {
         System.out.println(ids);
@@ -540,13 +596,16 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JButton botonEmoji;
     private javax.swing.JButton botonEnviar;
     private javax.swing.JButton botonMenu;
+    private javax.swing.JMenuItem chg_foto_grupo;
+    private javax.swing.JMenuItem del_grupo;
+    private javax.swing.JMenuItem edit_perfil;
+    private javax.swing.JMenuItem env_audio;
+    private javax.swing.JMenuItem env_documento;
+    private javax.swing.JMenuItem env_imgagen;
+    private javax.swing.JMenuItem env_video;
     private javax.swing.JPanel imagenPerfil;
     private javax.swing.JEditorPane inputTexto;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -554,6 +613,7 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JLabel lab_ConectUsu;
     private javax.swing.JList<String> listaConversaciones;
     private javax.swing.JMenu menuArchivo;
+    private javax.swing.JMenuItem new_grupo;
     private javax.swing.JLabel nomConversacion;
     private javax.swing.JLabel nomPerfil;
     private javax.swing.JPanel panelImgConversacion;
