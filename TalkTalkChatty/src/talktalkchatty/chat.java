@@ -6,7 +6,7 @@
 package talktalkchatty;
 
 import com.sun.glass.events.KeyEvent;
-import java.awt.Desktop;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -118,8 +118,16 @@ public class chat extends javax.swing.JFrame {
         botonAdjuntar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
+        env_archivo = new javax.swing.JMenuItem();
+        edit_perfil = new javax.swing.JMenuItem();
         new_grupo = new javax.swing.JMenuItem();
         del_grupo = new javax.swing.JMenuItem();
+
+        adjuntarArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adjuntarArchivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout adjuntarFrameLayout = new javax.swing.GroupLayout(adjuntarFrame.getContentPane());
         adjuntarFrame.getContentPane().setLayout(adjuntarFrameLayout);
@@ -290,6 +298,11 @@ public class chat extends javax.swing.JFrame {
                 botonEnviarMouseClicked(evt);
             }
         });
+        botonEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEnviarActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -337,9 +350,37 @@ public class chat extends javax.swing.JFrame {
         jMenuBar1.setBorder(null);
 
         menuArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/menuIconMini.png"))); // NOI18N
+        menuArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuArchivoMouseClicked(evt);
+            }
+        });
+
+        env_archivo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        env_archivo.setText("Adjuntar archivo");
+        env_archivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                env_archivoActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(env_archivo);
+
+        edit_perfil.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
+        edit_perfil.setText("Editar perfil");
+        edit_perfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit_perfilActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(edit_perfil);
 
         new_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
-        new_grupo.setText("Nuevo grupo");
+        new_grupo.setText("Nueva conversacion");
+        new_grupo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                new_grupoMouseClicked(evt);
+            }
+        });
         new_grupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 new_grupoActionPerformed(evt);
@@ -348,7 +389,7 @@ public class chat extends javax.swing.JFrame {
         menuArchivo.add(new_grupo);
 
         del_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK));
-        del_grupo.setText("Borrar grupo");
+        del_grupo.setText("Borrar conversacion");
         del_grupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 del_grupoActionPerformed(evt);
@@ -512,7 +553,15 @@ public class chat extends javax.swing.JFrame {
             String nombre = JOptionPane.showInputDialog(this,"Nombre del grupo a crear:");
         }
     }//GEN-LAST:event_inputTextoKeyPressed
-  
+
+    private void edit_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_perfilActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(() -> {
+            new Perfil(se,co,id,nombre,foto,email).setVisible(true);
+            
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_edit_perfilActionPerformed
     private void new_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_grupoActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
@@ -549,12 +598,90 @@ public class chat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_listaConversacionesValueChanged
 
-    private void del_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_grupoActionPerformed
-                    String nombre = JOptionPane.showInputDialog(this,"Nombre del grupo a borrar(Debe ser admin del grupo):");
-                    if(nombre != null)
+    private void env_archivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_env_archivoActionPerformed
+       this.adjuntarArchivoActionPerformed(evt);
+    }//GEN-LAST:event_env_archivoActionPerformed
+
+    private void adjuntarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adjuntarArchivoActionPerformed
+        // TODO add your handling code here:
+        int seleccion=0;
+        almacenamiento alb = new almacenamiento();
+        String [] archAdj;
+
+        adjuntarArchivo.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);    //para solo abrir archivos
+        seleccion = adjuntarArchivo.showOpenDialog(this);                             //abrimos la ventana de seleccion de archivo
+
+        if(seleccion == javax.swing.JFileChooser.APPROVE_OPTION)                    //En caso de haber abierto la ventana de seleccion
+        {
+            java.io.File archivoElegido = adjuntarArchivo.getSelectedFile();          //copiamos el archivo
+            try{
+                String nombre = archivoElegido.getName();                           //copiamos su nombre
+                String direccion = archivoElegido.getAbsolutePath();                //copiamos su direccion
+                File archivo = new File(direccion);
+                if(archivo.exists() && archivo.isFile())
+                {
+                    if(!(archivo.length() < 2500))
                     {
-                        co.borrarGrupo(this.id,nombre);
+                            JOptionPane.showMessageDialog(this, "Selecciona una imagen de menos de 2,5KB");
                     }
+                    else{
+                         archAdj=alb.leer(archivo);
+                    String mensa = "<p align=\"left\" style=\"width:220px;\">"+archivo+"</p>";
+                    String mensa2 = "<p align=\"right\" style=\"width:180px;color:#8D77B9;\">"+archivo+"</p>";
+                    almacenamiento al = new almacenamiento();
+                    int indice = listaConversaciones.getSelectedIndex(); 
+                    al.addmensaje(email,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa);
+                    co.enviarmensaje(id,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa2);
+                    this.refrescarConversacion();}
+                  //java.awt.Desktop.getDesktop().open(archivo.getAbsoluteFile());]
+                }
+            }                                                                       //copiamos la direccion del archivo para subirla al servidor
+            catch(NullPointerException ex){}
+
+        }
+    }//GEN-LAST:event_adjuntarArchivoActionPerformed
+
+    private void botonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnviarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonEnviarActionPerformed
+
+    private void menuArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuArchivoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuArchivoMouseClicked
+
+    private void new_grupoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_new_grupoMouseClicked
+        // TODO add your handling code here:
+        String ids = JOptionPane.showInputDialog(this,"Agregue el id del usuario o correo(sin #):");
+            co.searchUser(ids, this);
+    }//GEN-LAST:event_new_grupoMouseClicked
+
+    private void del_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_grupoActionPerformed
+        // TODO add your handling code here:
+        int indice = -1;
+        System.out.println("eliminar conversacion");
+        //Comprobamos que haya algo seleccionado
+        String nombre = JOptionPane.showInputDialog(this,"Agregue el nombre de la conversacion a borrar");
+        if (!nombre.isEmpty()) {
+            for(int i=0; i<modelo.size(); i++){
+                System.out.println(modelo.get(i));
+                if(modelo.get(i).equals(nombre))
+                    indice=i;     
+            }
+            if(indice>=0){
+                String mensaje = "¿Estás seguro de eliminar esta conversación?";
+                int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
+                    JOptionPane.YES_NO_OPTION);
+
+                if (resp == 0) {
+                    almacenamiento al = new almacenamiento();
+                    al.eliminarConversacion(email,this.modelo_id.get(indice));
+                    modelo.remove(indice);
+                    this.modelo_id.remove(indice);
+                    this.CargarConversacion();
+                }
+            }
+        }
+
     }//GEN-LAST:event_del_grupoActionPerformed
 
     private void pantallaHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_pantallaHyperlinkUpdate
@@ -615,6 +742,8 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JButton botonEmoji;
     private javax.swing.JButton botonEnviar;
     private javax.swing.JMenuItem del_grupo;
+    private javax.swing.JMenuItem edit_perfil;
+    private javax.swing.JMenuItem env_archivo;
     private javax.swing.JPanel imagenPerfil;
     private javax.swing.JEditorPane inputTexto;
     private javax.swing.JMenuBar jMenuBar1;
