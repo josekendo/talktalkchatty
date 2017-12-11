@@ -168,6 +168,9 @@
               <Dimension value="[175, 175]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fotoPerfil1MouseClicked"/>
+          </Events>
           <LayoutCode>
             <CodeStatement>
               <CodeExpression id="1_fotoPerfil1">

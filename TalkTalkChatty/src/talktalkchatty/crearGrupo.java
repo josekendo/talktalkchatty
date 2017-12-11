@@ -94,6 +94,11 @@ public class crearGrupo extends javax.swing.JFrame {
 
         fotoPerfil1.setBackground(new java.awt.Color(255, 255, 255));
         fotoPerfil1.setPreferredSize(new java.awt.Dimension(175, 175));
+        fotoPerfil1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fotoPerfil1MouseClicked(evt);
+            }
+        });
         fotoPerfil1.setLayout(new javax.swing.OverlayLayout(fotoPerfil1));
 
         javax.swing.GroupLayout fotoPerfilLayout = new javax.swing.GroupLayout(fotoPerfil);
@@ -200,7 +205,7 @@ public class crearGrupo extends javax.swing.JFrame {
 
     private void fotoPerfilcerrarCambiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoPerfilcerrarCambiar
         // TODO add your handling code here:
-        fotoPerfil1.setVisible(false);
+        //fotoPerfil1.setVisible(false);
     }//GEN-LAST:event_fotoPerfilcerrarCambiar
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -219,12 +224,13 @@ public class crearGrupo extends javax.swing.JFrame {
         //aqui envio de cambio de foto
         if(file != null && file.length() < 2500 && this.inputName.getText().length() >= 1)
         {
-            email = componentes.getText();
             almacenamiento al = new almacenamiento();
             String imagennueva = al.comprimir(file.getPath(), se);
-            foto = imagennueva;
             JOptionPane.showMessageDialog(this, "Creando Grupo");
-            co.crearGrupo(id,this.inputName.getText(),imagennueva, email);
+            if(!(componentes.getText().length() < 1))
+            co.crearGrupo(id,this.inputName.getText(),imagennueva,componentes.getText());
+            else
+            co.crearGrupo(id,this.inputName.getText(),imagennueva,"nada");
             java.awt.EventQueue.invokeLater(() -> {
                 new chat(co,se,id,nombre,foto,e).setVisible(true);
             });
@@ -237,6 +243,23 @@ public class crearGrupo extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void fotoPerfil1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoPerfil1MouseClicked
+               int relVal = adjuntarArchivo.showOpenDialog(adjuntarFrame);
+               if (relVal == JFileChooser.APPROVE_OPTION) {
+                if(adjuntarArchivo.getSelectedFile().length() < 2500)
+                {
+                    this.file = adjuntarArchivo.getSelectedFile();
+                    fotoPerfil1.add(new Imagen(fotoPerfil1.getHeight(), fotoPerfil1.getWidth(),file.getPath(),1));
+                    fotoPerfil1.repaint();
+                    fotoPerfil1.setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "Tamaño maximo de imagen 2.5KB.");
+                }
+               }
+    }//GEN-LAST:event_fotoPerfil1MouseClicked
 
     /**
      * @param args the command line arguments
