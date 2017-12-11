@@ -259,25 +259,90 @@ public class almacenamiento {
     //conversacion contiene tu id - mensaje, su id - mensaje
     public void crearConversacion(String tuemail, String id,String nombre,String foto)
     {
+        String carpeta = tuemail+"/"+id;
         String ruta = tuemail+"/"+id+"/conversacion";
         String ruta2 = tuemail+"/"+id+"/infoUser";
         File archivo2 = new File(ruta2);
         File archivo = new File(ruta);
-        try
+        File carpet = new File(carpeta);
+        if(!archivo2.exists())
         {
-        archivo.createNewFile();
-        archivo2.createNewFile();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(archivo2));
-        bw.write(id);
-        bw.newLine();
-        bw.write(nombre);
-        bw.newLine();
-        bw.write(foto);
-        bw.newLine();
-        }catch(IOException ex)
-        {
-            System.out.print(ex);
+            if(!carpet.exists())
+            carpet.mkdir();
+            
+            try
+            {
+                if(!archivo.exists())
+                archivo.createNewFile();
+                if(!archivo.exists())
+                archivo2.createNewFile();
+                
+                BufferedWriter bw = new BufferedWriter(new FileWriter(archivo2));
+                bw.write(id);
+                bw.newLine();
+                bw.write(nombre);
+                bw.newLine();
+                bw.write(foto);
+                bw.newLine();
+                bw.close();
+            }catch(IOException ex)
+            {
+                System.out.print(ex);
+            }
         }
+    }
+    //elimina la conversacion del directorio
+    public void eliminarConversacion(String tuemail, String id)
+    {
+        //instanciamos el directorio
+        File directorio = new File(tuemail+"/"+id+"/");
+        //recorremos el directorio y borramos todos los archivos
+        File[] ficheros = directorio.listFiles();
+        for (File fichero : ficheros) {
+            fichero.delete();
+        }
+        //finalmente borramos el directorio
+        directorio .delete();
+        //nunca habran directorios por lo que no tenemos que preocuparnos
+    }
+    //obtenemos los directorios de las conversaciones
+    public String[] obtenerConversaciones(String tuemail)
+    {
+        File directorio = new File(tuemail+"/");
+        //recorremos el directorio y borramos todos los archivos
+        File[] ficheros = directorio.listFiles();
+        int contador = 0;
+        for (File fichero : ficheros) {
+            if(fichero.isDirectory())
+            {
+                contador++;
+            }
+        }
+        String [] conversaciones = new String[contador];
+        int contador2 = 0;
+        for (File fichero : ficheros) {
+            if(fichero.isDirectory())
+            {
+               conversaciones[contador2] = fichero.getName();  
+               contador2++;
+            }
+        }
+        return conversaciones;
+    }
+    //obtiene nombre de grupo o chat
+    public String obtenerNombre(String tuemail,String id)
+    {
+        String nombre = "";
+        File archivo_info = new File(tuemail+"/"+id+"/infoUser");
+        System.out.print("buscando conversacion ->"+id);
+        if(archivo_info.exists())
+        {
+            if(this.leer(archivo_info).length >= 2)
+            {
+                return this.leer(archivo_info)[1];
+            }            
+        }
+        return nombre;
     }
     //metodo de descompilar
     public void descomprimir(String bites,String archivoDestino, String dire)
@@ -317,5 +382,68 @@ public class almacenamiento {
             System.out.println(ex);
         }
     }
-    //metodo buscar todas las conversaciones
+    //metodo para cargar todas las conversaciones
+    public String[] obtenerConversacion(String tuemail, String id)
+    {
+        File archivo_com = new File(tuemail+"/"+id+"/conversacion");
+        if(archivo_com.exists())
+        {
+            if(this.leer(archivo_com).length == 1 && this.leer(archivo_com)[0].length() == 0)
+            {
+                return new String[0];
+            }
+            else
+            {
+                return this.leer(archivo_com);
+            }
+        }
+        return null;
+    }
+    
+    public void addmensaje(String tuemail,String id,String men)
+    {
+        File archivo_com = new File(tuemail+"/"+id+"/conversacion");
+        if(archivo_com.exists())
+        {
+            BufferedWriter bw = null;
+            try {
+                bw = new BufferedWriter(new FileWriter(archivo_com,true));
+                bw.write(men);
+                bw.newLine();
+            } catch (IOException ex) {
+                Logger.getLogger(almacenamiento.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    bw.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(almacenamiento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }  
+    }
+    
+    public void addmensajenuevo(String tuemail,String id,String men)
+    {
+        File archivo_com2 = new File(tuemail+"/"+id);
+        File archivo_com = new File(tuemail+"/"+id+"/conversacion");
+        if(!archivo_com.exists())
+        {
+            archivo_com2.mkdir();
+            if(!archivo_com.exists())
+            {
+                try {
+                    archivo_com.createNewFile();
+                    BufferedWriter bw = null;
+                    bw = new BufferedWriter(new FileWriter(archivo_com));
+                    bw.write(men);
+                    bw.newLine();
+                    bw.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(almacenamiento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    
     }

@@ -74,38 +74,26 @@ public class conexion {
             entrada = new DataInputStream(conexion.getInputStream());
             se = seg;
             ((hilo) new hilo(conexion,this)).start();//iniciamos escucha 
+             Thread.currentThread().sleep(250); 
             return true;
         } 
-        catch (IOException ex) 
+        catch (IOException | InterruptedException ex) 
         {
             System.out.println("Ha ocurrido un error al establecer la conexion ->"+ex);
         }
         return false;
     }
     //envia un mensaje al servidor para que lo prepare para el cliente (quizas lo pase a json.... vere) 
-    public boolean enviarmensaje(String miID, String destinoID, String mensaje,int tipo)
+    public boolean enviarmensaje(String miID, String destinoID, String men)
     {
         if(this.entrada != null && this.salida != null)
         {
-            try
-            {
-                if(tipo == 0)//envia mensajes normales aun destinatario
-                {
-                    this.salida.writeUTF(("@#men@#"+mensaje+"@#ori@#"+miID+"@#des@#"+destinoID+"##"));
-                }
-                if(tipo == 1)//envia clave publica(cifrada)
-                {
-                    this.salida.writeUTF(("@#clvp@#"+mensaje+"@#ori@#"+miID+"##"));                
-                }
-                if(tipo == 2)//envia clave secreta o aes(cifrada) 
-                {
-                    this.salida.writeUTF(("@#clvs@#"+mensaje+"@#ori@#"+miID));                
-                }
-                return true;
-            } 
-            catch (IOException ex)
-            {
-               System.out.println ("Error en el envio de mensaje [ERR] ->"+ex);
+            try {
+                String mensaje = "SentMen#odin@"+miID+"#odin@"+destinoID+"#odin@"+men;
+                mensaje = se.encriptarMiSessionSuSession("servidor",mensaje); 
+                salida.writeUTF(mensaje);
+            } catch (IOException ex) {
+                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return false;
@@ -197,4 +185,15 @@ public class conexion {
     {
         ch.contestSearchUser(id,nombre,confirmacion,foto);
     }
+    
+    public void sentMen(String origen,String mensaje)
+    {
+        ch.sentMen(origen,mensaje);
+    }
+    
+    public void asignarCH(chat c)
+    {
+        ch = c;
+    }
+    
 }

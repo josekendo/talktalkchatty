@@ -26,11 +26,12 @@ public class hilo extends Thread {
     private conexion padre;
     private Key clave_session;
     private PublicKey clave_publica;
-            
+    private int codes;        
     public hilo(Socket socket, conexion p) 
     {
         this.socket = socket;
         this.padre = p;
+        this.codes = 0;
         try 
         {
             dos = new DataOutputStream(socket.getOutputStream());
@@ -59,8 +60,9 @@ public class hilo extends Thread {
             boolean seguir = true;
             while (seguir)
             {
+                dos.writeUTF("vivo");
                 accion = dis.readUTF();
-                if(accion.compareTo("") != 0)
+                if(accion.compareTo("") != 0 && !(accion.contains("vivo")))
                 {
                     if(accion.contains("#hela@") == false && accion.split("#odin@").length >= 2 && accion.split("#odin@")[0].compareToIgnoreCase("Sbienvenida")== 0)
                     {
@@ -105,27 +107,48 @@ public class hilo extends Thread {
                     }
                     else if(accion.contains("#hela@") && padre.recuperarSE().desencriptarMiSessionSuSession(accion.split("#hela@")[0], clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion.split("#hela@")[0], clave_session).split("#odin@")[0].compareToIgnoreCase("searchUser") == 0)
                     {
-                        System.out.println("entro aqui");
                         String partes [] = padre.recuperarSE().desencriptarMiSessionSuSession(accion.split("#hela@")[0],this.clave_session).split("#odin@");
                         String fototito = "";
                         if(accion.split("#hela@").length > 1)
                         {
                            fototito  = accion.split("#hela@")[1];
                         }
-                        System.out.println(accion);
-                        //id nombre foto
-                        System.out.println(partes[3]);
+                        if(partes.length >= 4)
                         padre.contestSearchUser(partes[1], partes[2], partes[3], fototito);
+                    }
+                    else if(accion.contains("#hela@") == false && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@")[0].compareToIgnoreCase("SentMen") == 0)
+                    {
+                        String partes [] = padre.recuperarSE().desencriptarMiSessionSuSession(accion,this.clave_session).split("#odin@");
+                        System.out.println(partes[0]+" - "+partes[1]);
+                        String partes2 [] = partes[1].split("##mensaje@@");
+                        String partes3 [] = partes[1].split("#codes@");
+                        if(partes3.length >= 2 && this.codes < Integer.parseInt(partes3[1]))
+                        {   
+                            codes = Integer.parseInt(partes3[1]);//Esto es para recibir solo uno pero de esta forma no se puede controlar el primer mensaje
+                            String mensaje = "OKMEN#odin@"+partes3[1];
+                            System.out.println("Enviado mensaje de confirmacion de llegada ->"+mensaje);
+                            dos.writeUTF(padre.recuperarSE().encriptarMiSessionSuSession(mensaje, clave_session));
+                            
+                            if(partes2.length >= 2)
+                            padre.sentMen(partes2[0], partes2[1]);
+                        }
                     }
                     else
                     {
                        System.out.println("mensaje no reconocido -> "+accion);
                     }
                 }
+                
+                if(accion.contains("vivo"))
+                {
+                    
+                }
+
             }
         } catch (IOException ex) {
             /*Logger.getLogger(hilo.class.getName()).log(Level.SEVERE, null, ex);*/
            /*detectar cierre de sesion*/
+           System.out.println("Error de hilo -> "+ex);
         }
     }
     
