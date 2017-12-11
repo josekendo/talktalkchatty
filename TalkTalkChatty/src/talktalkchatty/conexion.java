@@ -27,6 +27,7 @@ public class conexion {
     private registro re;
     private Login lo;
     private chat ch;
+    private int estado;
     //inicializamos el objeto conexion(unico) pasandole la ip y el puerto
     public conexion(String ipp, int puertop) 
     {
@@ -34,6 +35,7 @@ public class conexion {
         this.puerto = puertop;
         this.entrada = null;
         this.salida = null;
+        this.estado = 0;//no hay conexion
     }
     //este metodo informa si el servidor esta disponible, devuelve true si lo esta y false si no
     public boolean testserver()
@@ -74,11 +76,11 @@ public class conexion {
             entrada = new DataInputStream(conexion.getInputStream());
             se = seg;
             ((hilo) new hilo(conexion,this)).start();//iniciamos escucha 
-             Thread.currentThread().sleep(250); 
             return true;
         } 
-        catch (IOException | InterruptedException ex) 
+        catch (IOException ex) 
         {
+            estado = 0;
             System.out.println("Ha ocurrido un error al establecer la conexion ->"+ex);
         }
         return false;
@@ -131,13 +133,20 @@ public class conexion {
     public void registro(String email,String nombre, String password, String foto,registro res)
     {
         try {
-            re = res;
-            String mensaje = "RegistroUser"+"#odin@"+email+"#odin@"+nombre+"#odin@"+password;
-            System.out.println(mensaje);
-            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
-            mensaje = mensaje+"#hela@"+foto;
-            System.out.print(salida.size());
-            salida.writeUTF(mensaje);
+            if(estado == 2)
+            {
+                re = res;
+                String mensaje = "RegistroUser"+"#odin@"+email+"#odin@"+nombre+"#odin@"+password;
+                System.out.println(mensaje);
+                mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+                mensaje = mensaje+"#hela@"+foto;
+                System.out.print(salida.size());
+                salida.writeUTF(mensaje);
+            }
+            else
+            {
+                res.mensajeError("El servidor no esta disponible intentelo mas tarde");
+            }
             
         } catch (IOException ex) {
             Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,9 +163,17 @@ public class conexion {
     {
         try {
             lo = log;
-            String mensaje = "LoginUser"+"#odin@"+nombre+"#odin@"+pass;
-            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje); 
-            salida.writeUTF(mensaje);
+            if(estado == 2)
+            {
+                String mensaje = "LoginUser"+"#odin@"+nombre+"#odin@"+pass;
+                mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+                salida.writeUTF(mensaje);
+            }
+            else
+            {
+                if(log != null)
+                log.mensajeError("El servidor no esta disponible intentelo mas tarde");
+            }
         } catch (IOException ex) {
             Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -194,6 +211,28 @@ public class conexion {
     public void asignarCH(chat c)
     {
         ch = c;
+    }
+    
+    public void cambiarImagen(String id, String photo)
+    {
+        try {
+            String mensaje = "CambioImagen#odin@"+id;
+            mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+            mensaje = mensaje+"#hela@"+photo;
+            salida.writeUTF(mensaje);
+        } catch (IOException ex) {
+            Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void cambiarEstado(int e)
+    {
+        this.estado = e;
+    }
+    
+    public int getEstado()
+    {
+        return this.estado;
     }
     
 }

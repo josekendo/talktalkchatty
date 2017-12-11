@@ -66,6 +66,7 @@ public class hilo extends Thread {
                 {
                     if(accion.contains("#hela@") == false && accion.split("#odin@").length >= 2 && accion.split("#odin@")[0].compareToIgnoreCase("Sbienvenida")== 0)
                     {
+                        padre.cambiarEstado(1);
                         System.out.println("recibimos su publica");
                         this.clave_publica = padre.recuperarSE().loadcp_externa(accion.split("#odin@")[1]);
                         //ahora encriptamos con su publica nuestra clave publica 
@@ -85,6 +86,7 @@ public class hilo extends Thread {
                     }
                     else if(accion.contains("#hela@") == false && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@")[0].compareToIgnoreCase("CONFISECURITY") == 0)//el servidor te envia una clave aes
                     {
+                        padre.cambiarEstado(2);
                         System.out.println("Conexion segura establecida");
                     }
                     else if(accion.contains("#hela@") == false && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@").length >= 2 && padre.recuperarSE().desencriptarMiSessionSuSession(accion, clave_session).split("#odin@")[0].compareToIgnoreCase("existEmail") == 0)
@@ -148,6 +150,7 @@ public class hilo extends Thread {
         } catch (IOException ex) {
             /*Logger.getLogger(hilo.class.getName()).log(Level.SEVERE, null, ex);*/
            /*detectar cierre de sesion*/
+           padre.cambiarEstado(0);
            System.out.println("Error de hilo -> "+ex);
         }
     }

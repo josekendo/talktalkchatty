@@ -26,6 +26,7 @@ public class Perfil extends javax.swing.JFrame {
     private String nombre;
     private String foto;
     private String email;
+    private File file;
     public Perfil(seguridad seg, conexion con, String ids, String nom, String photo,String e) {
         initComponents();
         se = seg;
@@ -33,10 +34,19 @@ public class Perfil extends javax.swing.JFrame {
         id = ids;
         email = e;
         nombre = nom;
+        file = null;
         foto = photo;
-        
-        Imagen foto = new Imagen(fotoPerfil.getHeight(), fotoPerfil.getWidth(),"logoTTC.png");
-        fotoPerfil.add(foto);
+        Imagen img;
+        String ima = new almacenamiento().descomprimir(photo,email+"/archivo.temp",email+"/");
+        if(ima != "")
+        {
+           img = new Imagen(fotoPerfil.getWidth(),fotoPerfil.getHeight(),ima,1);
+        }
+        else
+        {
+           img = new Imagen(fotoPerfil.getWidth(),fotoPerfil.getHeight(),"logoTTC.png");        
+        }
+        fotoPerfil.add(img);
         fotoPerfil.repaint();
         
         
@@ -129,7 +139,7 @@ public class Perfil extends javax.swing.JFrame {
             fotoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fotoPerfilLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fotoPerfil1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addComponent(fotoPerfil1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -150,6 +160,8 @@ public class Perfil extends javax.swing.JFrame {
         });
 
         jLabel.setText("Nombre:");
+
+        inputName.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,7 +230,8 @@ public class Perfil extends javax.swing.JFrame {
         int relVal = adjuntarArchivo.showOpenDialog(adjuntarFrame);
         if (relVal == JFileChooser.APPROVE_OPTION) {
             //Ha subido un archivo
-            File file = adjuntarArchivo.getSelectedFile();
+            this.file = adjuntarArchivo.getSelectedFile();
+            if(this.file.length() < 2500)
             try{
                 int i;
                 String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1);
@@ -236,6 +249,11 @@ public class Perfil extends javax.swing.JFrame {
                 }
             } catch (Exception ex) {
               System.out.println("problem accessing file"+file.getAbsolutePath());
+            }
+            else
+            {
+                this.file = null;
+                JOptionPane.showMessageDialog(this, "La imagen es demasiado grande(2.5KB Maximo)");               
             }
         } 
         else {
@@ -256,14 +274,23 @@ public class Perfil extends javax.swing.JFrame {
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // GUARDAR EN EL SERVIDOR LOS DATOS
-        
-        
-        
-        JOptionPane.showMessageDialog(this, "Tus datos han sido guardados");
-        java.awt.EventQueue.invokeLater(() -> {
-            new chat(co,se,id,nombre,foto,email).setVisible(true);
-        });
-        this.setVisible(false);
+        //aqui envio de cambio de foto
+        if(file != null)
+        {
+            almacenamiento al = new almacenamiento();
+            String imagennueva = al.comprimir(file.getPath(), se);
+            foto = imagennueva;
+            co.cambiarImagen(this.id, imagennueva);
+            JOptionPane.showMessageDialog(this, "Tus datos han sido guardados, en breve se actualizara su foto de perfil");
+            java.awt.EventQueue.invokeLater(() -> {
+                new chat(co,se,id,nombre,foto,email).setVisible(true);
+            });
+            this.setVisible(false);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No a seleccionado una imagen valida.");  
+        }
         
     }//GEN-LAST:event_botonAceptarActionPerformed
 

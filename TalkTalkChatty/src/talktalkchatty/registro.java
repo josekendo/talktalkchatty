@@ -322,7 +322,10 @@ public class registro extends javax.swing.JFrame {
     private void campoEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEmailKeyReleased
         // TODO add your handling code here:
         //comprobamos que el email es valido
-        co.comprobarEmail(campoEmail.getText(), this);
+        if(co.getEstado() == 2)
+            co.comprobarEmail(campoEmail.getText(), this);
+        else
+            wrongRegistro.setText("No se puede comprobar el correo");
     }//GEN-LAST:event_campoEmailKeyReleased
 
     public void contestEmail(String email,boolean estado)
@@ -337,6 +340,11 @@ public class registro extends javax.swing.JFrame {
             wrongRegistro.setForeground(Color.RED);
             wrongRegistro.setText("No esta disponible este email");
         }
+    }
+    
+    public void mensajeError(String error)
+    {
+        JOptionPane.showMessageDialog(this,error); 
     }
     
     public void contestRegistro(String id)
