@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package talktalkchatty;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jmld4
@@ -190,6 +193,11 @@ public class Login extends javax.swing.JFrame {
         }
     }
     
+    public void mensajeError(String error)
+    {
+        JOptionPane.showMessageDialog(this,error); 
+    }
+    
     private void forgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
@@ -246,6 +254,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceder;
