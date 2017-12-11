@@ -247,7 +247,6 @@ public class Perfil extends javax.swing.JFrame {
                     fotoPerfil1.add(cambiar);
                     fotoPerfil1.repaint();
                     fotoPerfil1.setVisible(true);
-                    
                 }else{
                     throw new Exception(". Formato no permitido");
                 }

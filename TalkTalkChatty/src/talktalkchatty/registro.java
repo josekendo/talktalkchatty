@@ -302,7 +302,7 @@ public class registro extends javax.swing.JFrame {
                 wrongRegistro.setText("Las contraseñas no coinciden");
             }
         }
-        if(iguales){
+        if(iguales && new File(this.campoDireccionFoto.getText()).exists()){
                     //email, nombre, password, foto
                     campoEmail.setEditable(false);
                     campoNombreUsuario.setEditable(false);

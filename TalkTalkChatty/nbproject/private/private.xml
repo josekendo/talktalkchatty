@@ -3,11 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/workspace/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Perfil.java</file>
             <file>file:/C:/workspace/talktalkchatty/TalkTalkChatty/src/talktalkchatty/crearGrupo.java</file>
             <file>file:/C:/workspace/talktalkchatty/TalkTalkChatty/src/talktalkchatty/registro.java</file>
             <file>file:/C:/workspace/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Login.java</file>
             <file>file:/C:/workspace/talktalkchatty/TalkTalkChatty/src/talktalkchatty/chat.java</file>
+=======
+<<<<<<< Updated upstream
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Perfil.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/seguridad.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/chat.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/conexion.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/registro.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Login.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/almacenamiento.java</file>
+            <file>file:/D:/Users/Débora/NetBeansProjects/talktalkchatty/TalkTalkChatty/src/talktalkchatty/hilo.java</file>
+=======
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/chat.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Imagen.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/seguridad.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Login.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/almacenamiento.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/hilo.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/registro.java</file>
+            <file>file:/C:/Users/JVAC/Documents/NetBeansProjects/talktalkchatty2/talktalkchatty/TalkTalkChatty/src/talktalkchatty/Perfil.java</file>
+>>>>>>> Stashed changes
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
