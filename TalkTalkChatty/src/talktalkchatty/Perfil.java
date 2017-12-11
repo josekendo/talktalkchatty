@@ -243,6 +243,10 @@ public class Perfil extends javax.swing.JFrame {
                 if(i<extPermitidos.length){
                     //Aqui habria que poner lo que hace con la foto
                     //Pero no la debe enviar al servidor, eso es al darle a guardar
+                    Imagen cambiar = new Imagen(fotoPerfil1.getHeight(), fotoPerfil1.getWidth(),file.getPath(),1);
+                    fotoPerfil1.add(cambiar);
+                    fotoPerfil1.repaint();
+                    fotoPerfil1.setVisible(true);
                     
                 }else{
                     throw new Exception(". Formato no permitido");
