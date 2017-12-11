@@ -5,17 +5,30 @@
  */
 package talktalkchatty;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author JVAC
  */
 public class crearGrupo extends javax.swing.JFrame {
+    private seguridad se;
+    private conexion co;
+    private String id;
+    private String nombre;
+    private String foto;
+    private String[] email;
+    private File file;
 
     /**
      * Creates new form crearGrupo
      */
     public crearGrupo() {
         initComponents();
+        
+        
     }
 
     /**
@@ -27,21 +40,197 @@ public class crearGrupo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        adjuntarFrame = new javax.swing.JFrame();
+        adjuntarArchivo = new javax.swing.JFileChooser();
+        fotoPerfil = new javax.swing.JPanel();
+        fotoPerfil1 = new javax.swing.JPanel();
+        botonCancelar = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
+        jLabel = new javax.swing.JLabel();
+        inputName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        componentes = new javax.swing.JTextArea();
+
+        javax.swing.GroupLayout adjuntarFrameLayout = new javax.swing.GroupLayout(adjuntarFrame.getContentPane());
+        adjuntarFrame.getContentPane().setLayout(adjuntarFrameLayout);
+        adjuntarFrameLayout.setHorizontalGroup(
+            adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(adjuntarFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(adjuntarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        adjuntarFrameLayout.setVerticalGroup(
+            adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(adjuntarFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(adjuntarFrameLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(adjuntarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        fotoPerfil.setBackground(new java.awt.Color(204, 255, 255));
+        fotoPerfil.setPreferredSize(new java.awt.Dimension(175, 175));
+        fotoPerfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                fotoPerfilabrirCambiar(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                fotoPerfilcerrarCambiar(evt);
+            }
+        });
+
+        fotoPerfil1.setBackground(new java.awt.Color(255, 255, 255));
+        fotoPerfil1.setPreferredSize(new java.awt.Dimension(175, 175));
+        fotoPerfil1.setLayout(new javax.swing.OverlayLayout(fotoPerfil1));
+
+        javax.swing.GroupLayout fotoPerfilLayout = new javax.swing.GroupLayout(fotoPerfil);
+        fotoPerfil.setLayout(fotoPerfilLayout);
+        fotoPerfilLayout.setHorizontalGroup(
+            fotoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+            .addGroup(fotoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fotoPerfilLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(fotoPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        fotoPerfilLayout.setVerticalGroup(
+            fotoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+            .addGroup(fotoPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(fotoPerfilLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(fotoPerfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
+        );
+
+        botonCancelar.setText("Cancelar");
+        botonCancelar.setPreferredSize(new java.awt.Dimension(78, 41));
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
+
+        botonAceptar.setText("Guardar");
+        botonAceptar.setPreferredSize(new java.awt.Dimension(78, 41));
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
+
+        jLabel.setText("Nombre Grupo:");
+
+        jLabel1.setText("Participantes:");
+
+        componentes.setColumns(20);
+        componentes.setRows(5);
+        jScrollPane1.setViewportView(componentes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(inputName)
+                        .addGap(17, 17, 17))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(fotoPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fotoPerfilabrirCambiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoPerfilabrirCambiar
+        // TODO add your handling code here:
+        fotoPerfil1.setVisible(true);
+    }//GEN-LAST:event_fotoPerfilabrirCambiar
+
+    private void fotoPerfilcerrarCambiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoPerfilcerrarCambiar
+        // TODO add your handling code here:
+        fotoPerfil1.setVisible(false);
+    }//GEN-LAST:event_fotoPerfilcerrarCambiar
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        //Cancela
+        JOptionPane.showMessageDialog(this, "No se ha creado nada");
+        java.awt.EventQueue.invokeLater(() -> {
+            new chat(co,se,id,nombre,foto,email).setVisible(true);
+
+        });
+        this.setVisible(false);
+
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        // GUARDAR EN EL SERVIDOR LOS DATOS
+        //aqui envio de cambio de foto
+        if(file != null)
+        {
+            email = componentes.getText().split(",");
+            
+            almacenamiento al = new almacenamiento();
+            String imagennueva = al.comprimir(file.getPath(), se);
+            foto = imagennueva;
+            //co.cambiarImagen(this.id, imagennueva);
+            JOptionPane.showMessageDialog(this, "Grupo creado");
+            java.awt.EventQueue.invokeLater(() -> {
+                new chat(co,se,id,nombre,foto,email).setVisible(true);
+            });
+            this.setVisible(false);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "No ha seleccionado una imagen valida.");
+        }
+
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +268,16 @@ public class crearGrupo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFileChooser adjuntarArchivo;
+    private javax.swing.JFrame adjuntarFrame;
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JTextArea componentes;
+    private javax.swing.JPanel fotoPerfil;
+    private javax.swing.JPanel fotoPerfil1;
+    private javax.swing.JTextField inputName;
+    private javax.swing.JLabel jLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

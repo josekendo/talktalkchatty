@@ -589,9 +589,14 @@ public class chat extends javax.swing.JFrame {
     private void edit_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_perfilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edit_perfilActionPerformed
-
+  
     private void new_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_grupoActionPerformed
         // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(() -> {
+            new crearGrupo().setVisible(true);
+            
+        });
+        this.setVisible(false);
     }//GEN-LAST:event_new_grupoActionPerformed
 
     private void chg_foto_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chg_foto_grupoActionPerformed
