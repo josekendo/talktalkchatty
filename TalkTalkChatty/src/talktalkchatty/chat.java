@@ -7,16 +7,51 @@ package talktalkchatty;
 
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
+
+class FocusedTitleListCellRenderer implements ListCellRenderer {
+  protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+  protected Border borde = BorderFactory.createLineBorder(Color.white, 2);
+  
+  public Component getListCellRendererComponent(JList list, Object value, int index,
+      boolean isSelected, boolean cellHasFocus) {
+    JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index,
+        isSelected, cellHasFocus);
+    
+    if ((index%2) == 0) {
+        renderer.setBackground(Color.decode("#2E9AFE")); // Azul oscuro
+    } else {
+        renderer.setBackground(Color.decode("#A9D0F5")); // Azul claro
+    }
+    
+    if (isSelected && cellHasFocus) {
+        renderer.setBorder(borde);
+        renderer.setForeground(Color.white); // Letra en blanco
+        renderer.setFont(new Font("Courier",Font.BOLD,14));
+    } else {
+        renderer.setBorder(null);
+    }
+    
+    return renderer;
+  }
+}
 
 /**
  *
@@ -33,7 +68,7 @@ public class chat extends javax.swing.JFrame {
     private String email;
     private String id;
     private String foto;
-    DefaultListModel<String> modelo;//contiene los nombre de los usuarios
+    DefaultListModel modelo;//contiene los nombre de los usuarios
     DefaultListModel<String> modelo_id;//contiene los ids de los nombre de los usuarios
 
     public chat(conexion con, seguridad seg, String ids, String nom, String photo, String e) 
@@ -182,6 +217,8 @@ public class chat extends javax.swing.JFrame {
             }
         });
 
+        listaConversaciones.setFixedCellHeight(30);
+        listaConversaciones.setFixedCellWidth(5);
         listaConversaciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaConversacionesMouseClicked(evt);
@@ -257,16 +294,18 @@ public class chat extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Perfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(botonAnyadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Perfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(botonAnyadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -451,8 +490,8 @@ public class chat extends javax.swing.JFrame {
                             .addComponent(panelImgConversacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonAdjuntar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonEnviar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -577,7 +616,7 @@ public class chat extends javax.swing.JFrame {
         // TODO add your handling code here:
         //aqui cargamos la conversacion
         //la carga sera simple los mensajes del usuario seran puesto con p y b en la alineacion derecha, la del usuario a la izquierda con p y color azul clarito
-        String valor = listaConversaciones.getSelectedValue();
+        String valor = modelo.getElementAt(listaConversaciones.getSelectedIndex()).toString();
         int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
         nomConversacion.setText(valor);
         almacenamiento al = new almacenamiento();
@@ -766,6 +805,10 @@ public class chat extends javax.swing.JFrame {
                 modelo_id.addElement(a);
             }
             listaConversaciones.setModel(modelo);
+            
+            // Diseño de la lista de conversaciones
+            ListCellRenderer renderer = new FocusedTitleListCellRenderer();
+            listaConversaciones.setCellRenderer(renderer);
         }
     }
     private int SacarNumeroMiembrosGrupo(int indice, String grupo) {
