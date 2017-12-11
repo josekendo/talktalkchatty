@@ -114,7 +114,6 @@ public class chat extends javax.swing.JFrame {
         panelImgConversacion = new javax.swing.JPanel();
         botonEmoji = new javax.swing.JButton();
         botonAdjuntar = new javax.swing.JButton();
-        botonMenu = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         env_imgagen = new javax.swing.JMenuItem();
@@ -273,7 +272,7 @@ public class chat extends javax.swing.JFrame {
                 .addComponent(Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botonAnyadir, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(botonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -333,14 +332,10 @@ public class chat extends javax.swing.JFrame {
             }
         });
 
-        botonMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/menuIconMini.png"))); // NOI18N
-        botonMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonMenuActionPerformed(evt);
-            }
-        });
+        jMenuBar1.setBackground(new java.awt.Color(255, 102, 204));
+        jMenuBar1.setBorder(null);
 
-        menuArchivo.setText("Opciones");
+        menuArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/menuIconMini.png"))); // NOI18N
 
         env_imgagen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.SHIFT_MASK));
         env_imgagen.setText("Enviar imagen");
@@ -383,6 +378,11 @@ public class chat extends javax.swing.JFrame {
 
         del_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.SHIFT_MASK));
         del_grupo.setText("Borrar grupo");
+        del_grupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                del_grupoActionPerformed(evt);
+            }
+        });
         menuArchivo.add(del_grupo);
 
         chg_foto_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
@@ -416,8 +416,7 @@ public class chat extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
+                                .addComponent(botonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(panelImgConversacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,11 +424,9 @@ public class chat extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nomConversacion)
                             .addComponent(lab_ConectUsu))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                        .addComponent(botonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(botonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addComponent(botonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,17 +437,12 @@ public class chat extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(botonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(botonAdjuntar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(nomConversacion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lab_ConectUsu))
-                            .addComponent(panelImgConversacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelImgConversacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonAdjuntar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -535,10 +527,6 @@ public class chat extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_botonAdjuntarActionPerformed
 
-    private void botonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonMenuActionPerformed
-
     private void abrirPerfilPropio(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abrirPerfilPropio
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
@@ -564,6 +552,38 @@ public class chat extends javax.swing.JFrame {
 
     private void env_imgagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_env_imgagenActionPerformed
         // TODO add your handling code here:
+        int relVal = adjuntarArchivo.showOpenDialog(adjuntarFrame);
+        if (relVal == JFileChooser.APPROVE_OPTION) {
+            //Ha subido un archivo
+            File file = adjuntarArchivo.getSelectedFile();
+            try{
+                int i;
+                String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1);
+                String[] extPermitidos = {"png","jpg"};
+                
+                for (i = 0; i < extPermitidos.length; i++) {
+                    if(extPermitidos[i].equals(ext))break;
+                }
+                if(i<extPermitidos.length){
+                    
+                    String mensa = "<p align=\"left\" style=\"width:220px;\">"+file+"</p>";
+                    String mensa2 = "<p align=\"right\" style=\"width:180px;color:#8D77B9;\">"+file+"</p>";
+                    almacenamiento al = new almacenamiento();
+                    int indice = listaConversaciones.getSelectedIndex(); 
+                    al.addmensaje(email,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa);
+                    co.enviarmensaje(id,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa2);
+                    this.refrescarConversacion();
+                }else{
+                    throw new Exception(". Formato no permitido");
+                }
+            } catch (Exception ex) {
+              System.out.println("problem accessing file"+file.getAbsolutePath());
+            }
+        } 
+        else {
+            //No ha subido nada
+            System.out.println("File access cancelled by user.");
+        }   
     }//GEN-LAST:event_env_imgagenActionPerformed
 
     private void edit_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_perfilActionPerformed
@@ -605,6 +625,32 @@ public class chat extends javax.swing.JFrame {
             pantalla.setText(mensaje);
         }
     }//GEN-LAST:event_listaConversacionesValueChanged
+
+    private void del_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_grupoActionPerformed
+        // TODO add your handling code here:
+       /* String grupoAEliminar = JOptionPane.showInputDialog("Selecciona la conversaicón a eliminar").toString();
+        for(int i=0; i< listaConversaciones.getComponentCount(); i++)
+        {
+            if(listaConversaciones.)
+        }
+        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
+        System.out.println("eliminar conversacion");
+        //Comprobamos que haya algo seleccionado
+        if (indice >= 0) {
+            String mensaje = "¿Estás seguro de eliminar esta conversación?";
+            int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
+                JOptionPane.YES_NO_OPTION);
+                
+            if (resp == 0) { 
+                almacenamiento al = new almacenamiento();
+                al.eliminarConversacion(email,this.modelo_id.get(indice));
+                modelo.remove(indice);
+                this.modelo_id.remove(indice);
+                this.CargarConversacion();
+            }
+        }*/
+          
+    }//GEN-LAST:event_del_grupoActionPerformed
 
     public void contestSearchUser(String ids,String nombre,String confirmacion, String foto)
     {
@@ -649,7 +695,6 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonEmoji;
     private javax.swing.JButton botonEnviar;
-    private javax.swing.JButton botonMenu;
     private javax.swing.JMenuItem chg_foto_grupo;
     private javax.swing.JMenuItem del_grupo;
     private javax.swing.JMenuItem edit_perfil;
