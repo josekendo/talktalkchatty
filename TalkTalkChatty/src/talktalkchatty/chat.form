@@ -421,6 +421,9 @@
               <Dimension value="[6, 6]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="hyperlinkUpdate" listener="javax.swing.event.HyperlinkListener" parameters="javax.swing.event.HyperlinkEvent" handler="pantallaHyperlinkUpdate"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -281,6 +281,11 @@ public class chat extends javax.swing.JFrame {
         pantalla.setEditable(false);
         pantalla.setContentType("text/html"); // NOI18N
         pantalla.setMaximumSize(new java.awt.Dimension(6, 6));
+        pantalla.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                pantallaHyperlinkUpdate(evt);
+            }
+        });
         jScrollPane2.setViewportView(pantalla);
 
         botonEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/sendIconMini.png"))); // NOI18N
@@ -539,6 +544,7 @@ public class chat extends javax.swing.JFrame {
     private void botonAnyadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnyadirMouseClicked
             // TODO add your handling code here:
             String ids = JOptionPane.showInputDialog(this,"Agregue el id del usuario o correo(sin #):");
+            if(ids != null)
             co.searchUser(ids, this);
     }//GEN-LAST:event_botonAnyadirMouseClicked
 
@@ -546,7 +552,7 @@ public class chat extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            
+            String nombre = JOptionPane.showInputDialog(this,"Nombre del grupo a crear:");
         }
     }//GEN-LAST:event_inputTextoKeyPressed
 
@@ -591,7 +597,7 @@ public class chat extends javax.swing.JFrame {
     }//GEN-LAST:event_edit_perfilActionPerformed
 
     private void new_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_grupoActionPerformed
-        // TODO add your handling code here:
+       String ids = JOptionPane.showInputDialog(this,"Agregue el id del usuario o correo(sin #):");
     }//GEN-LAST:event_new_grupoActionPerformed
 
     private void chg_foto_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chg_foto_grupoActionPerformed
