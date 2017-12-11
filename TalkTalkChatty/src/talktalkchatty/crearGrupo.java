@@ -19,15 +19,21 @@ public class crearGrupo extends javax.swing.JFrame {
     private String id;
     private String nombre;
     private String foto;
-    private String[] email;
+    private String email;
     private File file;
+    private String e;
 
     /**
      * Creates new form crearGrupo
      */
-    public crearGrupo() {
+    public crearGrupo(seguridad s,conexion c, String i, String n, String f, String em) {
         initComponents();
-        
+        se = s;
+        co = c;
+        id = i;
+        nombre = n;
+        foto = f;
+        e = em;
         
     }
 
@@ -128,7 +134,7 @@ public class crearGrupo extends javax.swing.JFrame {
 
         jLabel.setText("Nombre Grupo:");
 
-        jLabel1.setText("Participantes:");
+        jLabel1.setText("Participantes(id separado por comas):");
 
         componentes.setColumns(20);
         componentes.setRows(5);
@@ -199,9 +205,9 @@ public class crearGrupo extends javax.swing.JFrame {
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         //Cancela
-        JOptionPane.showMessageDialog(this, "No se ha creado nada");
+        JOptionPane.showMessageDialog(this, "No se ha creado el grupo.");
         java.awt.EventQueue.invokeLater(() -> {
-            new chat(co,se,id,nombre,foto,email).setVisible(true);
+            new chat(co,se,id,nombre,foto,e).setVisible(true);
 
         });
         this.setVisible(false);
@@ -211,23 +217,23 @@ public class crearGrupo extends javax.swing.JFrame {
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         // GUARDAR EN EL SERVIDOR LOS DATOS
         //aqui envio de cambio de foto
-        if(file != null)
+        if(file != null && file.length() < 2500 && this.inputName.getText().length() >= 1)
         {
-            email = componentes.getText().split(",");
-            
+            email = componentes.getText();
             almacenamiento al = new almacenamiento();
             String imagennueva = al.comprimir(file.getPath(), se);
             foto = imagennueva;
-            //co.cambiarImagen(this.id, imagennueva);
-            JOptionPane.showMessageDialog(this, "Grupo creado");
+            JOptionPane.showMessageDialog(this, "Creando Grupo");
+            co.crearGrupo(id,this.inputName.getText(),imagennueva, email);
             java.awt.EventQueue.invokeLater(() -> {
-                new chat(co,se,id,nombre,foto,email).setVisible(true);
+                new chat(co,se,id,nombre,foto,e).setVisible(true);
             });
             this.setVisible(false);
+            
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "No ha seleccionado una imagen valida.");
+            JOptionPane.showMessageDialog(this, "Te faltan campos por rellenar.");
         }
 
     }//GEN-LAST:event_botonAceptarActionPerformed
@@ -235,37 +241,6 @@ public class crearGrupo extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(crearGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(crearGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(crearGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(crearGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new crearGrupo().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser adjuntarArchivo;
