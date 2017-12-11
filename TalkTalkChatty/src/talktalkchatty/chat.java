@@ -22,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.Border;
+import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.html.HTMLDocument;
@@ -156,7 +157,6 @@ public class chat extends javax.swing.JFrame {
         edit_perfil = new javax.swing.JMenuItem();
         new_grupo = new javax.swing.JMenuItem();
         del_grupo = new javax.swing.JMenuItem();
-        chg_foto_grupo = new javax.swing.JMenuItem();
 
         adjuntarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,6 +324,11 @@ public class chat extends javax.swing.JFrame {
         pantalla.setEditable(false);
         pantalla.setContentType("text/html"); // NOI18N
         pantalla.setMaximumSize(new java.awt.Dimension(6, 6));
+        pantalla.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
+                pantallaHyperlinkUpdate(evt);
+            }
+        });
         jScrollPane2.setViewportView(pantalla);
 
         botonEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/sendIconMini.png"))); // NOI18N
@@ -430,15 +435,6 @@ public class chat extends javax.swing.JFrame {
             }
         });
         menuArchivo.add(del_grupo);
-
-        chg_foto_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.SHIFT_MASK));
-        chg_foto_grupo.setText("Cambiar foto de grupo");
-        chg_foto_grupo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chg_foto_grupoActionPerformed(evt);
-            }
-        });
-        menuArchivo.add(chg_foto_grupo);
 
         jMenuBar1.add(menuArchivo);
 
@@ -585,6 +581,7 @@ public class chat extends javax.swing.JFrame {
     private void botonAnyadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAnyadirMouseClicked
             // TODO add your handling code here:
             String ids = JOptionPane.showInputDialog(this,"Agregue el id del usuario o correo(sin #):");
+            if(ids != null)
             co.searchUser(ids, this);
     }//GEN-LAST:event_botonAnyadirMouseClicked
 
@@ -592,7 +589,7 @@ public class chat extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            
+            String nombre = JOptionPane.showInputDialog(this,"Nombre del grupo a crear:");
         }
     }//GEN-LAST:event_inputTextoKeyPressed
 
@@ -606,11 +603,11 @@ public class chat extends javax.swing.JFrame {
     }//GEN-LAST:event_edit_perfilActionPerformed
     private void new_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_grupoActionPerformed
         // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(() -> {
+            new crearGrupo(this.se,this.co,this.id,this.nombre,this.foto,this.email).setVisible(true);          
+        });
+        this.setVisible(false);
     }//GEN-LAST:event_new_grupoActionPerformed
-
-    private void chg_foto_grupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chg_foto_grupoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chg_foto_grupoActionPerformed
 
     private void listaConversacionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaConversacionesValueChanged
         // TODO add your handling code here:
@@ -726,6 +723,20 @@ public class chat extends javax.swing.JFrame {
 
     }//GEN-LAST:event_del_grupoActionPerformed
 
+    private void pantallaHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_pantallaHyperlinkUpdate
+        if(evt.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            //try {
+                //aqui nos vamos cuando algun usuario pulsa un link
+                System.out.print(evt.getURL());
+                //String ruta = evt.getURL().toString();
+                //File archi = new File(ruta);
+                //Desktop.getDesktop().open(archi);
+            /*} catch (IOException ex) {
+                Logger.getLogger(chat.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+        }
+    }//GEN-LAST:event_pantallaHyperlinkUpdate
+
     public void contestSearchUser(String ids,String nombre,String confirmacion, String foto)
     {
         if(confirmacion.contains("true"))
@@ -769,7 +780,6 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JButton botonEliminar;
     private javax.swing.JButton botonEmoji;
     private javax.swing.JButton botonEnviar;
-    private javax.swing.JMenuItem chg_foto_grupo;
     private javax.swing.JMenuItem del_grupo;
     private javax.swing.JMenuItem edit_perfil;
     private javax.swing.JMenuItem env_archivo;

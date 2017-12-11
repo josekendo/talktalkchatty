@@ -235,4 +235,34 @@ public class conexion {
         return this.estado;
     }
     
+    public void borrarGrupo(String ids, String nomGrupo)
+    {
+        String mensaje = "delGrupo#odin@"+ids+"#odin@"+nomGrupo;
+        if(this.estado == 2)
+        {
+            try {
+                mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+                salida.writeUTF(mensaje);
+            } catch (IOException ex) {
+                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void crearGrupo(String ids, String nomGrupo, String foto, String users)
+    {
+        String mensaje = "creGrupo#odin@"+nomGrupo+"#odin@"+ids+"#odin@"+users;
+        System.out.println(mensaje);
+        if(this.estado == 2)
+        {
+            try {
+                mensaje = se.encriptarMiSessionSuSession("servidor",mensaje);
+                System.out.print(mensaje+"#hela@"+foto);
+                salida.writeUTF(mensaje+"#hela@"+foto);
+            } catch (IOException ex) {
+                Logger.getLogger(conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
 }

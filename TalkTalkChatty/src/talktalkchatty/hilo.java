@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.security.Key;
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,12 +27,14 @@ public class hilo extends Thread {
     private conexion padre;
     private Key clave_session;
     private PublicKey clave_publica;
-    private int codes;        
+    private int codes; 
+    private ArrayList<Integer> verificaciones;
     public hilo(Socket socket, conexion p) 
     {
         this.socket = socket;
         this.padre = p;
         this.codes = 0;
+        verificaciones = new ArrayList();
         try 
         {
             dos = new DataOutputStream(socket.getOutputStream());
@@ -124,15 +127,18 @@ public class hilo extends Thread {
                         System.out.println(partes[0]+" - "+partes[1]);
                         String partes2 [] = partes[1].split("##mensaje@@");
                         String partes3 [] = partes[1].split("#codes@");
-                        if(partes3.length >= 2 && this.codes < Integer.parseInt(partes3[1]))
+                        if(partes3.length >= 2)
                         {   
-                            codes = Integer.parseInt(partes3[1]);//Esto es para recibir solo uno pero de esta forma no se puede controlar el primer mensaje
-                            String mensaje = "OKMEN#odin@"+partes3[1];
-                            System.out.println("Enviado mensaje de confirmacion de llegada ->"+mensaje);
-                            dos.writeUTF(padre.recuperarSE().encriptarMiSessionSuSession(mensaje, clave_session));
-                            
-                            if(partes2.length >= 2)
-                            padre.sentMen(partes2[0], partes2[1]);
+                            if(!this.verificaciones.contains(Integer.parseInt(partes3[1])))
+                            {
+                                String mensaje = "OKMEN#odin@"+partes3[1];
+                                System.out.println("Enviado mensaje de confirmacion de llegada ->"+mensaje);
+                                dos.writeUTF(padre.recuperarSE().encriptarMiSessionSuSession(mensaje, clave_session));
+                                if(partes2.length >= 2)
+                                padre.sentMen(partes2[0], partes2[1]);
+                                this.verificaciones.add(Integer.parseInt(partes3[1]));
+                            }
+
                         }
                     }
                     else
