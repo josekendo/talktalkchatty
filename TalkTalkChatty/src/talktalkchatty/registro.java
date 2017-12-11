@@ -236,7 +236,7 @@ public class registro extends javax.swing.JFrame {
                 File archivo = new File(this.campoDireccionFoto.getText());
                 if(archivo.exists() && archivo.isFile())
                 {
-                    if(!(archivo.length() < 2500))
+                    if(!(archivo.length() < 2500*8))
                     {
                             wrongRegistro.setForeground(Color.RED);
                             wrongRegistro.setText("La imagen debe ser de 2,5KB maximo.");
