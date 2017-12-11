@@ -7,6 +7,7 @@
 package talktalkchatty;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -231,6 +232,17 @@ public class registro extends javax.swing.JFrame {
                 String direccion = archivoElegido.getAbsolutePath();                //copiamos su direccion
                 this.setTitle(nombre);                                              //ponemos su nombre como titulo en el selector de archivo
                 campoDireccionFoto.setText(direccion);                              //y en el campo de texto de seleccion de foto de registro
+                //vamos a comprobar las dimensiones de la imagen
+                File archivo = new File(this.campoDireccionFoto.getText());
+                if(archivo.exists() && archivo.isFile())
+                {
+                    if(!(archivo.length() < 2500))
+                    {
+                            wrongRegistro.setForeground(Color.RED);
+                            wrongRegistro.setText("La imagen debe ser de 2,5KB maximo.");
+                            this.campoDireccionFoto.setText("");
+                    }
+                }
             }                                                                       //copiamos la direccion del archivo para subirla al servidor
             catch(NullPointerException ex){}
         }
@@ -286,6 +298,7 @@ public class registro extends javax.swing.JFrame {
             if(!iguales){
                 jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
                 jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 1));
+                wrongRegistro.setForeground(Color.RED);
                 wrongRegistro.setText("Las contraseñas no coinciden");
             }
         }
@@ -296,6 +309,7 @@ public class registro extends javax.swing.JFrame {
                     jPasswordField1.setEditable(false);
                     jPasswordField2.setEditable(false);
                     almacenamiento al = new almacenamiento();
+                    wrongRegistro.setForeground(Color.BLUE);
                     wrongRegistro.setText("Se esta registrando... Espere please..");
                     se.crearSecreta(se.sha512(new String(jPasswordField1.getPassword())));
                     String fotoEncriptada = al.comprimir(campoDireccionFoto.getText(), se);
@@ -315,10 +329,12 @@ public class registro extends javax.swing.JFrame {
     {
         if(estado && campoEmail.getText().compareToIgnoreCase(email) == 0)
         {
+             wrongRegistro.setForeground(Color.GREEN);
              wrongRegistro.setText("Esta disponible");
         }
         else
         {
+            wrongRegistro.setForeground(Color.RED);
             wrongRegistro.setText("No esta disponible este email");
         }
     }
@@ -336,6 +352,7 @@ public class registro extends javax.swing.JFrame {
             }
             else
             {
+                wrongRegistro.setForeground(Color.RED);
                 wrongRegistro.setText("Ha ocurrido un error, intentelo mas tarde.");
             }
         } catch (InterruptedException ex) {

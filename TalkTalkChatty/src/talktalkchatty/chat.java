@@ -57,14 +57,22 @@ public class chat extends javax.swing.JFrame {
             al.crearNuevoUsuarioLocal(email, email, nombre, foto, id);
         }
         
-        al.descomprimir(photo,email+"/archivo.temp",email+"/");
+        String ima = al.descomprimir(photo,email+"/archivo.temp",email+"/");
         //AQUI imagen conversacion
-        Imagen imgUsu = new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),"logoTTC.png");
+        Imagen imgUsu,imgPerfil;
+        imgUsu = new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),"logoTTC.png");        
         panelImgConversacion.add(imgUsu);
         panelImgConversacion.repaint();
         
         //AQUI imagen perfil usuario
-        Imagen imgPerfil = new Imagen(imagenPerfil.getWidth(),imagenPerfil.getHeight(),"logoTTC.png");
+        if(ima != "")
+        {
+           imgPerfil= new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),ima,1);
+        }
+        else
+        {
+           imgPerfil = new Imagen(panelImgConversacion.getWidth(),panelImgConversacion.getHeight(),"logoTTC.png");        
+        }
         imagenPerfil.add(imgPerfil);
         imagenPerfil.repaint();
         

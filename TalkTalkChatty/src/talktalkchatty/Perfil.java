@@ -34,6 +34,7 @@ public class Perfil extends javax.swing.JFrame {
         email = e;
         nombre = nom;
         foto = photo;
+        
         Imagen foto = new Imagen(fotoPerfil.getHeight(), fotoPerfil.getWidth(),"logoTTC.png");
         fotoPerfil.add(foto);
         fotoPerfil.repaint();

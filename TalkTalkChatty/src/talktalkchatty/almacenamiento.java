@@ -345,12 +345,13 @@ public class almacenamiento {
         return nombre;
     }
     //metodo de descompilar
-    public void descomprimir(String bites,String archivoDestino, String dire)
+    public String descomprimir(String bites,String archivoDestino, String dire)
     {
         String bitesr []= bites.split(",");
         byte [] bitesv= new byte[bitesr.length];
         boolean primero= true;
         int contador = 0;
+        String nombrearchivo = "";
         for(String a:bitesr)
         {
                 bitesv[contador]=(byte)Integer.parseInt(a,16);              
@@ -368,6 +369,7 @@ public class almacenamiento {
            System.out.println(entrada.getName());
 
            FileOutputStream fos = new FileOutputStream(dire+entrada.getName());
+           nombrearchivo = dire+entrada.getName();
            int leido;
            byte [] buffer = new byte[1024];
            while (0<(leido=zis.read(buffer))){
@@ -381,6 +383,7 @@ public class almacenamiento {
         {
             System.out.println(ex);
         }
+        return nombrearchivo;
     }
     //metodo para cargar todas las conversaciones
     public String[] obtenerConversacion(String tuemail, String id)
