@@ -5,6 +5,7 @@
  */
 package talktalkchatty;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -90,6 +91,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("logoTTC.png")).getImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nick o email: ");
@@ -182,6 +184,7 @@ public class Login extends javax.swing.JFrame {
         {
             //aqui nos logeamos
             chat nuevo = new chat(this.co,this.se,id,nombre,foto,this.user.getText());//pasamos foto, nombre,id,email, tambien la verificacion
+            nuevo.setLocationRelativeTo(null);
             nuevo.setVisible(true);
             this.dispose();
             System.out.println("correcto");            
@@ -201,7 +204,9 @@ public class Login extends javax.swing.JFrame {
     private void forgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new record().setVisible(true);
+           record nueva = new record(se,co);
+           nueva.setLocationRelativeTo(null);
+           nueva.setVisible(true);
         });
         /*javax.swing.JPanel recordar = new record();
             this.getContentPane().add(recordar);
@@ -214,7 +219,9 @@ public class Login extends javax.swing.JFrame {
     private void registro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro1ActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
-            new registro(se,co).setVisible(true);
+            registro nueva = new registro(se,co);
+            nueva.setLocationRelativeTo(null);
+            nueva.setVisible(true);
             
         });
         this.setVisible(false);
@@ -250,7 +257,9 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                Login nueva = new Login();
+                nueva.setLocationRelativeTo(null);
+                nueva.setVisible(true);
             }
         });
     }

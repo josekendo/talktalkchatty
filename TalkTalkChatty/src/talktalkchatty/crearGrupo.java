@@ -6,6 +6,7 @@
 package talktalkchatty;
 
 import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -80,6 +81,7 @@ public class crearGrupo extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("logoTTC.png")).getImage());
 
         fotoPerfil.setBackground(new java.awt.Color(204, 255, 255));
         fotoPerfil.setPreferredSize(new java.awt.Dimension(175, 175));

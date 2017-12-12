@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -69,6 +70,7 @@ public class chat extends javax.swing.JFrame {
     private String email;
     private String id;
     private String foto;
+    private int posicion;//posicion en la que se encuentra la lista
     DefaultListModel modelo;//contiene los nombre de los usuarios
     DefaultListModel<String> modelo_id;//contiene los ids de los nombre de los usuarios
 
@@ -83,6 +85,7 @@ public class chat extends javax.swing.JFrame {
         email = e;
         this.nomPerfil.setText(nombre);
         foto = photo;
+        posicion = -1;
         almacenamiento al = new almacenamiento();
         
         if(al.existeUsuarioLocal(email))
@@ -116,10 +119,13 @@ public class chat extends javax.swing.JFrame {
         // Preparada para anyadir usuarios y conversaciones
         modelo = new DefaultListModel();
         modelo_id= new <String>DefaultListModel();
+        
         this.CargarConversacion();
         String bienvenida = "<h1 align=\"center\">Bienvenid@ a TalkTalkChatty "+this.nombre+"</h1><br/><br/><p align=\"center\"><b>Para empezar a utilizar el chat agregue conversaciones con \"+\" o seleccione el usuario o grupo desde el panel izquierdo.</b></p>";
         this.pantalla.setText(bienvenida);
         this.lab_ConectUsu.setText("");
+        this.inputTexto.setText("");
+    
     }
 
     /**
@@ -144,13 +150,12 @@ public class chat extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         pantalla = new javax.swing.JEditorPane();
         botonEnviar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        inputTexto = new javax.swing.JEditorPane();
         lab_ConectUsu = new javax.swing.JLabel();
         nomConversacion = new javax.swing.JLabel();
         panelImgConversacion = new javax.swing.JPanel();
         botonEmoji = new javax.swing.JButton();
         botonAdjuntar = new javax.swing.JButton();
+        inputTexto = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         env_archivo = new javax.swing.JMenuItem();
@@ -186,6 +191,7 @@ public class chat extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("logoTTC.png")).getImage());
         setResizable(false);
 
         botonAnyadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/talktalkchatty/plusIconMini.png"))); // NOI18N
@@ -337,21 +343,6 @@ public class chat extends javax.swing.JFrame {
                 botonEnviarMouseClicked(evt);
             }
         });
-        botonEnviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEnviarActionPerformed(evt);
-            }
-        });
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        inputTexto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                inputTextoKeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(inputTexto);
-        inputTexto.getAccessibleContext().setAccessibleName("cosaPrueba");
 
         lab_ConectUsu.setText("Última conexión: 18:09");
 
@@ -385,6 +376,12 @@ public class chat extends javax.swing.JFrame {
             }
         });
 
+        inputTexto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputTextoKeyPressed(evt);
+            }
+        });
+
         jMenuBar1.setBackground(new java.awt.Color(255, 102, 204));
         jMenuBar1.setBorder(null);
 
@@ -392,6 +389,11 @@ public class chat extends javax.swing.JFrame {
         menuArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuArchivoMouseClicked(evt);
+            }
+        });
+        menuArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuArchivoActionPerformed(evt);
             }
         });
 
@@ -414,7 +416,7 @@ public class chat extends javax.swing.JFrame {
         menuArchivo.add(edit_perfil);
 
         new_grupo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_MASK));
-        new_grupo.setText("Nueva conversacion");
+        new_grupo.setText("Nueva Grupo");
         new_grupo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 new_grupoMouseClicked(evt);
@@ -455,8 +457,8 @@ public class chat extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addComponent(botonEmoji, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputTexto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -487,13 +489,17 @@ public class chat extends javax.swing.JFrame {
                             .addComponent(botonAdjuntar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonEnviar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(botonEnviar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(botonEmoji, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(9, 9, 9))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botonEmoji, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
 
@@ -502,34 +508,27 @@ public class chat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEnviarMouseClicked
-            String mensa = "<p align=\"left\" style=\"width:220px;\">"+this.inputTexto.getText()+"</p>";
-            String mensa2 = "<p align=\"right\" style=\"width:180px;color:#8D77B9;\">"+this.inputTexto.getText()+"</p>";
-            almacenamiento al = new almacenamiento();
-            int indice = listaConversaciones.getSelectedIndex(); 
-            al.addmensaje(email,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa);
-            co.enviarmensaje(id,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa2);
-            this.refrescarConversacion();
-    }//GEN-LAST:event_botonEnviarMouseClicked
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
+
         System.out.println("eliminar conversacion");
         //Comprobamos que haya algo seleccionado
-        if (indice >= 0) {
+        if (posicion >= 0) {
             String mensaje = "¿Estás seguro de eliminar esta conversación?";
             int resp = JOptionPane.showConfirmDialog(this,mensaje,"Eliminar",
                 JOptionPane.YES_NO_OPTION);
                 
-            if (resp == 0) { 
+            if (resp == 0) {
+                String bienvenida = "<h1 align=\"center\">Bienvenid@ a TalkTalkChatty "+this.nombre+"</h1><br/><br/><p align=\"center\"><b>Para empezar a utilizar el chat agregue conversaciones con \"+\" o seleccione el usuario o grupo desde el panel izquierdo.</b></p>";
+                this.pantalla.setText(bienvenida);
                 almacenamiento al = new almacenamiento();
-                al.eliminarConversacion(email,this.modelo_id.get(indice));
-                modelo.remove(indice);
-                this.modelo_id.remove(indice);
+                al.eliminarConversacion(email,this.modelo_id.get(posicion));
+                modelo.remove(posicion);
+                this.modelo_id.remove(posicion);
+                posicion = -1;
                 this.CargarConversacion();
             }
         }
@@ -538,10 +537,6 @@ public class chat extends javax.swing.JFrame {
     private void botonAnyadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnyadirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonAnyadirActionPerformed
-
-    private void listaConversacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConversacionesMouseClicked
-
-    }//GEN-LAST:event_listaConversacionesMouseClicked
 
     private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEliminarMouseClicked
     
@@ -585,14 +580,6 @@ public class chat extends javax.swing.JFrame {
             co.searchUser(ids, this);
     }//GEN-LAST:event_botonAnyadirMouseClicked
 
-    private void inputTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTextoKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            String nombre = JOptionPane.showInputDialog(this,"Nombre del grupo a crear:");
-        }
-    }//GEN-LAST:event_inputTextoKeyPressed
-
     private void edit_perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_perfilActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(() -> {
@@ -613,28 +600,6 @@ public class chat extends javax.swing.JFrame {
         // TODO add your handling code here:
         //aqui cargamos la conversacion
         //la carga sera simple los mensajes del usuario seran puesto con p y b en la alineacion derecha, la del usuario a la izquierda con p y color azul clarito
-        String valor = modelo.getElementAt(listaConversaciones.getSelectedIndex()).toString();
-        int indice = listaConversaciones.getSelectedIndex(); // empieza en 0
-        nomConversacion.setText(valor);
-        almacenamiento al = new almacenamiento();
-        String [] conversa = al.obtenerConversacion(email,this.modelo_id.get(indice));
-        System.out.println("Cambiamos a la conversacion con indice -> "+indice+" con id ->"+this.modelo_id.get(indice));
-        String mensaje = "";
-        if(conversa != null)
-        {
-            if(conversa.length == 0)
-            {
-                mensaje = "<h3 align=\"center\">Aun no ha empezado la conversacion con este usuario o grupo, envie un mensaje para empezar la conversacion</h3>";
-            }
-            else
-            {
-                for(String mensa:conversa)
-                {
-                    mensaje=mensaje+mensa;
-                }
-            }
-            pantalla.setText(mensaje);
-        }
     }//GEN-LAST:event_listaConversacionesValueChanged
 
     private void env_archivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_env_archivoActionPerformed
@@ -668,9 +633,8 @@ public class chat extends javax.swing.JFrame {
                     String mensa = "<p align=\"left\" style=\"width:220px;\">"+archivo+"</p>";
                     String mensa2 = "<p align=\"right\" style=\"width:180px;color:#8D77B9;\">"+archivo+"</p>";
                     almacenamiento al = new almacenamiento();
-                    int indice = listaConversaciones.getSelectedIndex(); 
-                    al.addmensaje(email,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa);
-                    co.enviarmensaje(id,this.modelo_id.get(indice).replaceAll("(\\r|\\n)",""), mensa2);
+                    al.addmensaje(email,this.modelo_id.get(posicion).replaceAll("(\\r|\\n)",""), mensa);
+                    co.enviarmensaje(id,this.modelo_id.get(posicion).replaceAll("(\\r|\\n)",""), mensa2);
                     this.refrescarConversacion();}
                   //java.awt.Desktop.getDesktop().open(archivo.getAbsoluteFile());]
                 }
@@ -679,10 +643,6 @@ public class chat extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_adjuntarArchivoActionPerformed
-
-    private void botonEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnviarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonEnviarActionPerformed
 
     private void menuArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuArchivoMouseClicked
         // TODO add your handling code here:
@@ -699,7 +659,7 @@ public class chat extends javax.swing.JFrame {
         int indice = -1;
         System.out.println("eliminar conversacion");
         //Comprobamos que haya algo seleccionado
-        String nombre = JOptionPane.showInputDialog(this,"Agregue el nombre de la conversacion a borrar");
+        String nombre = JOptionPane.showInputDialog(this,"Agregue el nombre del grupo a borrar");
         if (!nombre.isEmpty()) {
             for(int i=0; i<modelo.size(); i++){
                 System.out.println(modelo.get(i));
@@ -712,11 +672,13 @@ public class chat extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
 
                 if (resp == 0) {
+                    String bienvenida = "<h1 align=\"center\">Bienvenid@ a TalkTalkChatty "+this.nombre+"</h1><br/><br/><p align=\"center\"><b>Para empezar a utilizar el chat agregue conversaciones con \"+\" o seleccione el usuario o grupo desde el panel izquierdo.</b></p>";
+                    this.pantalla.setText(bienvenida);
                     almacenamiento al = new almacenamiento();
                     al.eliminarConversacion(email,this.modelo_id.get(indice));
-                    modelo.remove(indice);
-                    this.modelo_id.remove(indice);
-                    this.CargarConversacion();
+                    modelo.remove(posicion);
+                    this.modelo_id.remove(posicion);
+                    posicion = -1;
                 }
             }
         }
@@ -736,6 +698,74 @@ public class chat extends javax.swing.JFrame {
             }*/
         }
     }//GEN-LAST:event_pantallaHyperlinkUpdate
+
+    private void menuArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuArchivoActionPerformed
+
+    private void inputTextoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTextoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if(posicion != -1)
+            {
+                String mensa = "<p align=\"left\" style=\"width:220px;\"><b>"+this.nombre+": </b>"+this.inputTexto.getText()+"</p>";
+                String mensa2 = "<p align=\"right\" style=\"width:180px;color:#8D77B9;\"><b>"+this.nombre+": </b>"+this.inputTexto.getText()+"</p>";
+                almacenamiento al = new almacenamiento();
+                int indice = listaConversaciones.getSelectedIndex(); 
+                al.addmensaje(email,this.modelo_id.get(posicion).replaceAll("(\\r|\\n)",""), mensa);
+                co.enviarmensaje(id,this.modelo_id.get(posicion).replaceAll("(\\r|\\n)",""), mensa2);
+                this.refrescarConversacion();
+            }
+            this.inputTexto.setText("");
+        }
+    }//GEN-LAST:event_inputTextoKeyPressed
+
+    private void botonEnviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonEnviarMouseClicked
+        if(posicion != -1)
+        {
+            String mensa = "<p align=\"left\" style=\"width:220px;\"><b>"+this.nombre+": </b>"+this.inputTexto.getText()+"</p>";
+            String mensa2 = "<p align=\"right\" style=\"width:180px;color:#8D77B9;\"><b>"+this.nombre+": </b>"+this.inputTexto.getText()+"</p>";
+            almacenamiento al = new almacenamiento();
+            int indice = listaConversaciones.getSelectedIndex();
+            al.addmensaje(email,this.modelo_id.get(posicion).replaceAll("(\\r|\\n)",""), mensa);
+            co.enviarmensaje(id,this.modelo_id.get(posicion).replaceAll("(\\r|\\n)",""), mensa2);
+            this.refrescarConversacion();
+            this.inputTexto.setText("");
+        }
+    }//GEN-LAST:event_botonEnviarMouseClicked
+
+    private void listaConversacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConversacionesMouseClicked
+        if (evt.getClickCount() == 1) // Se mira si es doble click
+        {
+            posicion = listaConversaciones.locationToIndex(evt.getPoint());
+            System.out.println("La posicion es " + posicion);
+            if(posicion != -1)
+            {
+            String valor = modelo.getElementAt(posicion).toString();
+            nomConversacion.setText(valor);
+            almacenamiento al = new almacenamiento();
+            String [] conversa = al.obtenerConversacion(email,this.modelo_id.get(posicion));
+            System.out.println("Cambiamos a la conversacion con indice -> "+posicion+" con id ->"+this.modelo_id.get(posicion));
+            String mensaje = "";
+            if(conversa != null)
+            {
+                if(conversa.length == 0)
+                {
+                    mensaje = "<h3 align=\"center\">Aun no ha empezado la conversacion con este usuario o grupo, envie un mensaje para empezar la conversacion</h3>";
+                }
+                else
+                {
+                    for(String mensa:conversa)
+                    {
+                        mensaje=mensaje+mensa;
+                    }
+                }
+                pantalla.setText(mensaje);
+            }
+        }
+        }
+    }//GEN-LAST:event_listaConversacionesMouseClicked
 
     public void contestSearchUser(String ids,String nombre,String confirmacion, String foto)
     {
@@ -784,10 +814,9 @@ public class chat extends javax.swing.JFrame {
     private javax.swing.JMenuItem edit_perfil;
     private javax.swing.JMenuItem env_archivo;
     private javax.swing.JPanel imagenPerfil;
-    private javax.swing.JEditorPane inputTexto;
+    private javax.swing.JTextField inputTexto;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lab_ConectUsu;
@@ -829,28 +858,32 @@ public class chat extends javax.swing.JFrame {
         listaConversaciones.setModel(modelo);
     }
     
-    public boolean refrescarConversacion()
+    public void refrescarConversacion()
     {
-        int indice = listaConversaciones.getSelectedIndex();
-        almacenamiento al = new almacenamiento();
-        String [] conversa = al.obtenerConversacion(email,this.modelo_id.get(indice));
-        String mensaje = "";
-        if(conversa != null)
+        if(posicion != -1)
         {
-            if(conversa.length == 0)
+            String valor = modelo.getElementAt(posicion).toString();
+            nomConversacion.setText(valor);
+            almacenamiento al = new almacenamiento();
+            String [] conversa = al.obtenerConversacion(email,this.modelo_id.get(posicion));
+            System.out.println("Cambiamos a la conversacion con indice -> "+posicion+" con id ->"+this.modelo_id.get(posicion));
+            String mensaje = "";
+            if(conversa != null)
             {
-                mensaje = "<h3 align=\"center\">Aun no ha empezado la conversacion con este usuario o grupo, envie un mensaje para empezar la conversacion</h3>";
-            }
-            else
-            {
-                for(String mensa:conversa)
+                if(conversa.length == 0)
                 {
-                    mensaje=mensaje+mensa;
+                    mensaje = "<h3 align=\"center\">Aun no ha empezado la conversacion con este usuario o grupo, envie un mensaje para empezar la conversacion</h3>";
                 }
+                else
+                {
+                    for(String mensa:conversa)
+                    {
+                        mensaje=mensaje+mensa;
+                    }
+                }
+                pantalla.setText(mensaje);
             }
-            pantalla.setText(mensaje);
         }
-        return true;
     }
     
     public void sentMen(String origen, String men)
@@ -858,7 +891,6 @@ public class chat extends javax.swing.JFrame {
         //vamos a comprobar si existe
         //si no existe lo agregaremos al principio
         boolean existe = false;
-        int indice = listaConversaciones.getSelectedIndex();
         for(int a=0;a < this.modelo_id.size();a++)
         {
             if(this.modelo_id.get(a).compareToIgnoreCase(origen) == 0)
@@ -871,8 +903,9 @@ public class chat extends javax.swing.JFrame {
         {
            almacenamiento al = new almacenamiento();
            al.addmensaje(email, origen, men.split("#codes@")[0]);
-           System.out.println("Se agrega mensaje de origen -> "+origen);   
-           this.refrescarConversacion();
+           System.out.println(this.modelo_id.get(posicion)+" --- "+origen);  
+           if(this.modelo_id.get(posicion).compareToIgnoreCase(origen) == 0)
+           this.refrescarConversacion();//solo cuando estemos en la conversacion
         }
         else
         {
